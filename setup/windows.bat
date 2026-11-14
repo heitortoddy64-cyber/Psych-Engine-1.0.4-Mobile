@@ -11,7 +11,8 @@ haxelib install flixel-addons 3.2.1
 haxelib install flixel-tools 1.5.1
 haxelib install hscript-iris 1.1.3
 haxelib install tjson 1.4.0
-haxelib install hxdiscord_rpc 1.2.4
+rem Desktop Discord RPC 1.2.4, pinned to its public upstream over HTTPS.
+haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc bff4d27dcf1e02a06b84871cce9fe7d624ff517f || exit /b 1
 haxelib install hxvlc 2.0.1 --skip-dependencies
 haxelib set lime 8.1.2
 haxelib set openfl 9.3.3
