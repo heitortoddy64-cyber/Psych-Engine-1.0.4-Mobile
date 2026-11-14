@@ -1786,9 +1786,11 @@ class PlayState extends MusicBeatState
 			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, Math.exp(-elapsed * 3.125 * camZoomingDecay * playbackRate));
 		}
 
+		#if debug
 		FlxG.watch.addQuick("secShit", curSection);
 		FlxG.watch.addQuick("beatShit", curBeat);
 		FlxG.watch.addQuick("stepShit", curStep);
+		#end
 
 		// RESET = Quick Game Over Screen
 		if (!ClientPrefs.data.noReset && controls.RESET && canReset && !inCutscene && startedCountdown && !endingSong)
@@ -1813,8 +1815,12 @@ class PlayState extends MusicBeatState
 				callOnLuas('onSpawnNote', [notes.members.indexOf(dunceNote), dunceNote.noteData, dunceNote.noteType, dunceNote.isSustainNote, dunceNote.strumTime]);
 				callOnHScript('onSpawnNote', [dunceNote]);
 
-				var index:Int = unspawnNotes.indexOf(dunceNote);
-				unspawnNotes.splice(index, 1);
+				// Fast path: the spawned note is normally the first queued note.
+				// Scripts may rearrange the queue, so retain a safe fallback.
+				if (unspawnNotes[0] == dunceNote)
+					unspawnNotes.shift();
+				else
+					unspawnNotes.remove(dunceNote);
 			}
 		}
 
@@ -1836,7 +1842,11 @@ class PlayState extends MusicBeatState
 						while(i < notes.length)
 						{
 							var daNote:Note = notes.members[i];
-							if(daNote == null) continue;
+							if(daNote == null)
+							{
+								i++;
+								continue;
+							}
 
 							var strumGroup:FlxTypedGroup<StrumNote> = playerStrums;
 							if(!daNote.mustPress) strumGroup = opponentStrums;
@@ -1863,7 +1873,7 @@ class PlayState extends MusicBeatState
 								daNote.active = daNote.visible = false;
 								invalidateNote(daNote);
 							}
-							if(daNote.exists) i++;
+							if(daNote.exists || notes.members[i] == daNote) i++;
 						}
 					}
 					else
