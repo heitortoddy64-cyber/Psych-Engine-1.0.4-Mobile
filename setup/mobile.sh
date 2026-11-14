@@ -2,9 +2,11 @@
 # SETUP FOR MAC AND LINUX SYSTEMS!!!
 # REMINDER THAT YOU NEED HAXE INSTALLED PRIOR TO USING THIS
 # https://haxe.org/download
-cd ..
+set -e
+cd "$(dirname "$0")/.."
 echo Makking the main haxelib and setuping folder in same time..
-mkdir ~/haxelib && haxelib setup ~/haxelib
+mkdir -p "$HOME/haxelib"
+haxelib setup "$HOME/haxelib"
 echo Installing dependencies...
 echo This might take a few moments depending on your internet speed.
 haxelib install flixel 5.5.0
@@ -12,7 +14,6 @@ haxelib install flixel-addons 3.2.1
 haxelib install flixel-tools 1.5.1
 haxelib install hscript-iris 1.1.3
 haxelib install tjson 1.4.0
-haxelib git hxdiscord_rpc git@github.com:FunkinPortingMobile/hxdiscord_rpc-android-support master
 haxelib install hxvlc 2.0.1 --skip-dependencies
 haxelib install android-manager 1.0.1
 haxelib git lime https://github.com/DeveloperPorting-Stuff/lime-modified main
