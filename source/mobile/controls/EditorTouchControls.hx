@@ -174,6 +174,8 @@ class EditorTouchControls extends FlxSpriteGroup
 
  function processFrame()
  {
+  // Keep hardware mouse input usable when no touch is present, while suppressing touch-emulated clicks.
+  EditorInput.touchActive=FlxG.touches.list.length>0;
   EditorInput.keys.beginFrame(); EditorInput.ignoreBack=false;
   EditorPointer.touchStarted = EditorPointer.touchEnded = false;
   EditorPointer.dx=EditorPointer.dy=EditorPointer.scroll=0;

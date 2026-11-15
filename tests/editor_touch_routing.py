@@ -51,13 +51,14 @@ class Routing {
   var state=new MusicBeatState();var panel=new PsychUIBox();panel.scrollFactor.set();state.add(panel);EditorTouchControls.install(state,'Chart');var c:EditorTouchControls=cast state.members[1];
   check(panel.scrollFactor.x==1&&panel.scrollFactor.y==1&&panel.cameras[0]==c.ui,'dedicated HUD camera can pan panel');
   check(FlxG.plugins.list.length==1,'one plugin');
+  FlxG.mouse.justPressed=true;frame([]);check(EditorPointer.justPressed&&!EditorInput.touchActive,'idle hardware mouse retained');FlxG.mouse.justPressed=false;
   var first=new FlxTouch(900,300,1);frame([first]);check(EditorPointer.justPressed && c.primary==1,'capture primary');
   var second=new FlxTouch(930,310,2);frame([hold(first),second]);check(c.primary==1 && EditorInput.touch==first,'second canvas finger never steals');
   first.screenX=920;frame([first,hold(second)]);check(EditorPointer.dx==20,'drag delta');
   frame([release(first),second]);check(EditorPointer.justReleased && c.primary==-1,'release ends capture');frame([second]);check(c.primary==-1,'no midgesture handoff');
   c.expanded=true;c.page=2;c.rebuild();
   var box=c.boxes.filter(b->b.action!=null && b.action.label=='Copy')[0];var copy=new FlxTouch(Std.int(box.x+30),Std.int(box.y+25),3);
-  frame([copy]);check(!EditorInput.keys.pressed(67),'copy waits for release');frame([release(copy)]);check(EditorInput.keys.justPressed(67)&&EditorInput.keys.pressed(17),'copy combo on release');frame([]);check(!EditorInput.keys.pressed(67)&&EditorInput.keys.justReleased(67),'copy releases');
+  FlxG.mouse.justPressed=true;frame([copy]);check(!EditorPointer.justPressed,'toolbar touch suppresses emulated mouse');FlxG.mouse.justPressed=false;check(!EditorInput.keys.pressed(67),'copy waits for release');frame([release(copy)]);check(EditorInput.keys.justPressed(67)&&EditorInput.keys.pressed(17),'copy combo on release');frame([]);check(!EditorInput.keys.pressed(67)&&EditorInput.keys.justReleased(67),'copy releases');
   c.page=2;c.rebuild();box=c.boxes.filter(b->b.action!=null && b.action.label=='Delete')[0];var deletion=new FlxTouch(Std.int(box.x+30),Std.int(box.y+25),30);frame([deletion]);check(!EditorInput.keys.pressed(46),'delete waits for release');deletion.screenX+=100;frame([release(deletion)]);check(!EditorInput.keys.pressed(46),'dragged release never deletes');frame([]);
   c.page=1;c.rebuild();box=c.boxes.filter(b->b.action!=null && b.action.label=='Scrub back')[0];var movement=new FlxTouch(Std.int(box.x+30),Std.int(box.y+25),4);
   frame([movement]);check(EditorInput.keys.pressed(87),'hold movement');frame([hold(movement)]);check(!EditorInput.keys.justPressed(87),'hold is not repeated immediately');FlxG.elapsed=0.6;frame([movement]);check(EditorInput.keys.justPressed(87),'long hold repeats');FlxG.elapsed=1/60;frame([]);check(!EditorInput.keys.pressed(87),'lost movement finger releases');
