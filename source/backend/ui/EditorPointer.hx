@@ -14,6 +14,7 @@ class EditorPointer
 	public static var dx:Float = 0;
 	public static var dy:Float = 0;
 	public static var scroll:Int = 0;
+	public static var cancelled:Bool = false;
 	static function source():FlxPointer
 	{
 		#if mobile
@@ -69,7 +70,7 @@ class EditorPointer
 	public static function getPositionInCameraView(?camera:FlxCamera, ?point:FlxPoint):FlxPoint return source().getPositionInCameraView(camera, point);
 	public static function reset()
 	{
-		touchDown = touchStarted = touchEnded = blocked = false;
+		touchDown = touchStarted = touchEnded = blocked = cancelled = false;
 		dx = dy = 0;
 		scroll = touchButton = 0;
 	}

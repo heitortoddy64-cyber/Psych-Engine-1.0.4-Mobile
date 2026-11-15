@@ -32,7 +32,7 @@ Every editor has a compact bottom touch bar. Tap `TOUCH …` to expand/collapse 
 
 `FAST` and `PRECISE` supply the existing Shift/Control modifiers. Movement buttons support hold/repeat; destructive commands and normal UI buttons activate after a stationary release. One canvas finger is captured until release; toolbar fingers are handled separately. Menus use the captured touch's real camera coordinates. No fake system keyboard events are generated.
 
-Text fields use Android's existing soft keyboard path. Enter/Done or Back dismisses focus; Back in the touch bar closes focus first. Dropdowns scroll by dragging and do not open the keyboard. The contextual bar yields to text entry, prompts and SAF pickers. Existing gameplay hitboxes and substate mobile controls remain available; the large legacy editor pads are replaced by labeled commands. Input and listeners clear on focus loss and editor destruction.
+Text fields use Android's existing soft keyboard path. Enter/Done or Back dismisses focus; Back in the touch bar closes focus first. Dropdowns scroll by dragging and do not open the keyboard. The contextual bar yields to text entry, prompts and SAF pickers. Existing gameplay hitboxes and substate mobile controls remain available; the large legacy editor pads are replaced by labeled commands. Input and listeners clear on focus loss and editor destruction. A state-owned Flixel input plugin polls after input managers update and before state/substate update. Changing toolbar pages cancels existing contacts; cancelled Chart drags finish at their last valid position instead of resuming on the next tap.
 
 ## Open and save
 
@@ -52,8 +52,21 @@ V1 gameplay changes, the Android no-Discord configuration, Lua, HScript, shaders
 
 **Mods that reference removed vanilla media must include those assets themselves.** Independent mod media and scripts are retained; compatibility with every third-party mod has not been tested.
 
-`backend.LiteAssets.validate()` runs during BASE_GAME_FILES compilation and fails for missing/changed protected Tutorial files or relocated images, invalid Tutorial JSON or the wrong Tutorial stage directory. `tests/lite_v2.py` exercises that real macro's success, missing-file and changed-file paths, asset accounting and the actual Haxe command state. Existing V1 and platform guard tests remain in CI.
+`backend.LiteAssets.validate()` runs during BASE_GAME_FILES compilation and fails for missing/changed protected Tutorial files or relocated images, invalid Tutorial JSON or the wrong Tutorial stage directory. `tests/lite_v2.py` exercises that real macro's success, missing-file and changed-file paths, asset accounting and the actual Haxe command state. An additional headless routing harness executes 26 assertions against the actual helper/input/pointer source with framework stand-ins. Existing V1 and platform guard tests remain in CI.
 
 Local Haxe 4.3.7 Android release type checking passed with all configured Lua/HScript/shader dependencies and without Discord. Native Android release compilation runs in `mainBuild.yml` through the reusable `android.yml` PR entry point; other platform jobs run only on manual Main Build dispatch. A successful type check alone is not an APK build. See the PR checks/artifact for native compilation results.
 
 [EDITOR_TOUCH_TEST_MATRIX.md](EDITOR_TOUCH_TEST_MATRIX.md) separates source review, automated checks, CI compilation and the **UNTESTED** Android device workflows. No actual touch-only device run, restart/persistence/provider test, audio-sync measurement, RAM/FPS benchmark or device screenshot was performed in this environment.
+
+## Changed source/configuration files
+
+- `Project.xml`; `.github/workflows/android.yml`, `.github/workflows/mainBuild.yml`.
+- `assets/shared/weeks/weekList.txt`, `assets/shared/data/characterList.txt`, `assets/shared/data/stageList.txt`; `assets/base_game/shared/stages/stage.json`; removals/relocations are enumerated in the manifest.
+- `source/backend/Achievements.hx`, `source/backend/WeekData.hx`, new `source/backend/LiteAssets.hx`.
+- `source/backend/ui/`: new `EditorKeyState.hx`, `EditorInput.hx`, `EditorPointer.hx`; existing `PsychUIBox.hx`, `PsychUIButton.hx`, `PsychUICheckBox.hx`, `PsychUIDropDownMenu.hx`, `PsychUIInputText.hx`, `PsychUINumericStepper.hx`, `PsychUIRadioGroup.hx`, `PsychUISlider.hx`.
+- New `source/mobile/controls/EditorTouchControls.hx`; `source/mobile/backend/java/FileUtils.java`.
+- `source/states/MainMenuState.hx`; `source/states/editors/`: `MasterEditorMenu.hx`, `ChartingState.hx`, `CharacterEditorState.hx`, `StageEditorState.hx`, `WeekEditorState.hx`, `MenuCharacterEditorState.hx`, `DialogueEditorState.hx`, `DialogueCharacterEditorState.hx`, `NoteSplashEditorState.hx`.
+- `source/states/editors/content/`: new `EditorFileTools.hx`; `FileDialogHandler.hx`, `Prompt.hx`, `EditorPlayState.hx`.
+- New `tests/lite_v2.py`, `tests/editor_touch_routing.py`, `docs/V2_ASSET_MANIFEST.json`, `docs/EDITOR_TOUCH_TEST_MATRIX.md`, this guide.
+
+These are V2 changes relative to `8947d61`; the PR also contains that unmerged Android/Discord fix, documented in `docs/ANDROID_DISCORD_FIX.md`.

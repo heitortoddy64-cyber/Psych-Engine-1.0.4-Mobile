@@ -676,6 +676,13 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var lastBeatHit:Int = 0;
 	override function update(elapsed:Float)
 	{
+		if(EditorPointer.cancelled)
+		{
+			// Finish a move at its last valid position; never reuse a cancelled drag on the next tap.
+			if(isMovingNotes) stopMovingNotes();
+			selectionBox.visible=false;
+			EditorPointer.cancelled=false;
+		}
 		if(!fileDialog.completed)
 		{
 			lastFocus = PsychUIInputText.focusOn;

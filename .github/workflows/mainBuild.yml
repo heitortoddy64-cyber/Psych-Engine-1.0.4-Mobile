@@ -38,6 +38,7 @@ jobs:
           python3 tests/discord_platforms.py
           python3 tests/optimization_v1.py
           python3 tests/lite_v2.py
+          python3 tests/editor_touch_routing.py
 
       - name: Configure Android
         run: |

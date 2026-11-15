@@ -2,9 +2,7 @@ package mobile.controls;
 
 #if mobile
 import flixel.FlxBasic;
-import flixel.group.FlxGroup;
 import flixel.input.keyboard.FlxKey;
-import flixel.input.touch.FlxTouch;
 
 private typedef EditorAction = {
  var label:String;
@@ -33,6 +31,7 @@ class EditorTouchControls extends FlxSpriteGroup
  var oldFocus:Bool = false;
  var modal:Bool=false;
  var wasBlocked:Bool=false;
+ var inputPlugin:EditorTouchInputPlugin;
  var boxes:Array<{x:Float,y:Float,w:Float,h:Float,run:Void->Void,action:EditorAction}> = [];
 
  public static function install(state:MusicBeatState, profile:String)
@@ -46,7 +45,7 @@ class EditorTouchControls extends FlxSpriteGroup
  {
   super(); owner = state;
   ui = new FlxCamera(); ui.bgColor = 0; FlxG.cameras.add(ui, false);
-  for(member in state.members) if(member != null && containsUI(member)) member.cameras = [ui];
+  for(member in state.members) if(member != null && containsUI(member)) bindPanel(cast member);
   hud = new FlxCamera(); hud.bgColor = 0; FlxG.cameras.add(hud, false); cameras = [hud];
   scrollFactor.set();
   addPage('VIEW', ['Edit/tap:', 'Drag/right:', 'Select/tap:', 'Move/tap:', 'UI pan:', 'UI zoom:', 'Reset UI:', 'Dock:']);
@@ -70,7 +69,7 @@ class EditorTouchControls extends FlxSpriteGroup
     if(profile == 'Portrait') addPage('LOOP OFFSET', ['Loop left:A','Loop right:D','Loop up:W','Loop down:S','Fast:','Precise:']);
     if(profile == 'Stage') addPage('STAGE', ['Sprite back:W','Sprite next:S','Toggle UI:F2','Toggle info:F3','Selection:F12','Fast:','Precise:','Help:F1']);
    case 'Dialogue':
-    addPage('DIALOGUE', ['Line back:A','Line next:D','Animation back:W','Animation next:S','Replay:SPACE','Add line:O','Delete line:P','Fast:']);
+    addPage('DIALOGUE', ['Line back:D','Line next:A','Animation back:W','Animation next:S','Replay:SPACE','Add line:O','Delete line:P']);
    case 'Splash':
     addPage('OFFSETS', ['Offset left:LEFT','Offset right:RIGHT','Offset up:UP','Offset down:DOWN','Replay:SPACE','Copy:CONTROL+C','Paste:CONTROL+V','Reset:CONTROL+R']);
     addPage('TOOLS', ['Fast:','Precise:','Help:F1','Scroll up:','Scroll down:']);
@@ -81,7 +80,9 @@ class EditorTouchControls extends FlxSpriteGroup
     addPage('NAVIGATE', ['Up:UP','Down:DOWN','Left:LEFT','Right:RIGHT','Confirm:ENTER','Scroll up:','Scroll down:']);
   }
   EditorInput.reset(); EditorInput.active = true; EditorInput.touchActive = true;
-  rebuild(); FlxG.signals.preUpdate.add(processFrame);
+  rebuild();
+  // Plugins update after Flixel's input managers and before the state/substate.
+  inputPlugin=FlxG.plugins.add(new EditorTouchInputPlugin(processFrame));
   FlxG.signals.focusLost.add(cancelInput);
   FlxG.signals.focusGained.add(cancelInput);
  }
@@ -93,6 +94,13 @@ class EditorTouchControls extends FlxSpriteGroup
   if(Std.isOfType(b, FlxSpriteGroup))
    for(child in (cast b:FlxSpriteGroup).members) if(child != null && containsUI(child)) return true;
   return false;
+ }
+
+ function bindPanel(panel:FlxSprite)
+ {
+  panel.cameras=[ui];
+  // HUD widgets originally ignore camera scroll. The dedicated UI camera must be pannable.
+  panel.scrollFactor.set(1,1);
  }
 
  function addPage(name:String, definitions:Array<String>)
@@ -118,6 +126,9 @@ class EditorTouchControls extends FlxSpriteGroup
 
  function rebuild()
  {
+  // A second finger must not inherit another page's button index after a layout change.
+  contacts.clear();
+  cancelPointer();
   while(members.length > 0) { var old = remove(members[0], true); old.destroy(); }
   boxes = [];
   var y = dockTop ? 0 : FlxG.height - (expanded ? 166 : 52);
@@ -170,11 +181,11 @@ class EditorTouchControls extends FlxSpriteGroup
   for(i in 0...boxes.length) members[i*2].alpha=1;
   // The UI camera needs to follow panels added after create (e.g. chart menus).
   if(owner.subState == null) for(member in owner.members)
-   if(member != null && member != this && containsUI(member)) member.cameras=[ui];
+   if(member != null && member != this && containsUI(member)) bindPanel(cast member);
   modal=owner.subState!=null && Type.getClassName(Type.getClass(owner.subState))!='states.editors.StageEditorAnimationSubstate';
   var focused = PsychUIInputText.focusOn != null;
   EditorInput.blockKeyboard=focused || oldFocus || states.editors.content.FileDialogHandler.isBusy;
-  if(wasBlocked != (modal || focused)) { contacts.clear();primary=-1;EditorPointer.touchDown=false;rebuild();wasBlocked=modal || focused; }
+  if(wasBlocked != (modal || focused)) { rebuild();wasBlocked=modal || focused; }
   if(focused || modal || states.editors.content.FileDialogHandler.isBusy)
   {
    EditorInput.keys.clear(); fast=precise=false;
@@ -182,8 +193,8 @@ class EditorTouchControls extends FlxSpriteGroup
    if(focused && FlxG.android.justReleased.BACK) { PsychUIInputText.focusOn=null; EditorInput.ignoreBack=true; }
    #end
   }
-  if(focused != oldFocus) { contacts.clear(); primary=-1; EditorPointer.touchDown=false; oldFocus=focused; }
-  if(states.editors.content.FileDialogHandler.isBusy) { contacts.clear(); primary=-1; EditorPointer.touchDown=false; EditorPointer.blocked=true; return; }
+  if(focused != oldFocus) { contacts.clear(); cancelPointer(); oldFocus=focused; }
+  if(states.editors.content.FileDialogHandler.isBusy) { contacts.clear(); cancelPointer(); EditorPointer.blocked=true; return; }
   for(touch in FlxG.touches.list)
   {
    var id=touch.touchPointID;
@@ -230,7 +241,7 @@ class EditorTouchControls extends FlxSpriteGroup
   }
   if(!focused && !modal) { if(fast) EditorInput.keys.hold(FlxKey.SHIFT); if(precise) EditorInput.keys.hold(FlxKey.CONTROL); }
   // A cancelled/lost contact must never retain a pointer or a command.
-  if(primary>=0 && !Lambda.exists(FlxG.touches.list, function(t) return t.touchPointID==primary)) { primary=-1;EditorPointer.touchDown=false; }
+  if(primary>=0 && !Lambda.exists(FlxG.touches.list, function(t) return t.touchPointID==primary)) cancelPointer();
   var lost:Array<Int>=[];
   for(id in contacts.keys()) if(!Lambda.exists(FlxG.touches.list, function(t) return t.touchPointID==id)) lost.push(id);
   for(id in lost) contacts.remove(id);
@@ -238,17 +249,34 @@ class EditorTouchControls extends FlxSpriteGroup
 
  function cancelInput()
  {
-  contacts.clear();primary=-1;fast=precise=false;
-  EditorInput.keys.clear();EditorInput.touch=null;EditorPointer.reset();
+  contacts.clear();cancelPointer();fast=precise=false;
+  EditorInput.keys.clear();EditorInput.touch=null;
+ }
+
+ function cancelPointer()
+ {
+  if(primary>=0) EditorPointer.cancelled=true;
+  primary=-1;
+  EditorPointer.touchDown=EditorPointer.touchStarted=EditorPointer.touchEnded=false;
+  EditorPointer.dx=EditorPointer.dy=0;
  }
 
  override public function destroy()
  {
-  FlxG.signals.preUpdate.remove(processFrame); contacts.clear(); EditorInput.reset();
+  FlxG.plugins.remove(inputPlugin);inputPlugin.destroy();inputPlugin=null;
+  contacts.clear(); EditorInput.reset();
   FlxG.signals.focusLost.remove(cancelInput);FlxG.signals.focusGained.remove(cancelInput);
   if(FlxG.cameras.list.contains(ui)) FlxG.cameras.remove(ui,true);
   if(FlxG.cameras.list.contains(hud)) FlxG.cameras.remove(hud,true);
   owner=null; super.destroy();
  }
+}
+
+private class EditorTouchInputPlugin extends FlxBasic
+{
+ var poll:Void->Void;
+ public function new(poll:Void->Void) {super();this.poll=poll;visible=false;}
+ override public function update(elapsed:Float) poll();
+ override public function destroy() {poll=null;super.destroy();}
 }
 #end

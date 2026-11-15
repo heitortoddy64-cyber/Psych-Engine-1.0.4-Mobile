@@ -172,6 +172,7 @@ class MainMenuState extends MusicBeatState
 			var mouseConfirmClick:Bool = false;
 			var touchConfirm:Bool = false;
 			#if mobile
+			if(menuTouch!=-1 && !Lambda.exists(FlxG.touches.list,function(t) return t.touchPointID==menuTouch)) menuTouch=-1;
 			for(touch in FlxG.touches.list)
 			{
 				if(touch.justPressed && menuTouch == -1)
