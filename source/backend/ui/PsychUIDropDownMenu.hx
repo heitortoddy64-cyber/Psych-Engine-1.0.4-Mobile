@@ -266,7 +266,11 @@ class PsychUIDropDownItem extends FlxSpriteGroup
 		super.update(elapsed);
 		if(EditorPointer.touchActive)
 		{
-			if(EditorPointer.justPressed && EditorPointer.overlaps(bg,camera)) { touchCandidate=true;startX=EditorPointer.screenX;startY=EditorPointer.screenY; }
+			if(EditorPointer.justPressed && EditorPointer.overlaps(bg,camera))
+			{
+				touchCandidate=true;startX=EditorPointer.screenX;startY=EditorPointer.screenY;
+				PsychUIEventHandler.event(PsychUIButton.PRESS_EVENT, this);
+			}
 			if(touchCandidate && (Math.abs(EditorPointer.screenX-startX)>18 || Math.abs(EditorPointer.screenY-startY)>18)) touchCandidate=false;
 			if(EditorPointer.justReleased) { var select=touchCandidate && EditorPointer.overlaps(bg,camera);touchCandidate=false;if(select && onClick!=null) onClick(); }
 		}

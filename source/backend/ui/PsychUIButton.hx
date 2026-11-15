@@ -5,6 +5,7 @@ import backend.ui.PsychUIBox.UIStyleData;
 class PsychUIButton extends FlxSpriteGroup
 {
 	public static final CLICK_EVENT = 'button_click';
+	public static final PRESS_EVENT = 'button_press';
 
 	public var name:String;
 	public var label(default, set):String;
@@ -100,6 +101,8 @@ class PsychUIButton extends FlxSpriteGroup
 				bg.color = clickStyle.bgColor;
 				bg.alpha = clickStyle.bgAlpha;
 				text.color = clickStyle.textColor;
+				// Consume the initial touch without executing the release-only action.
+				if(EditorPointer.touchActive && broadcastButtonEvent) PsychUIEventHandler.event(PRESS_EVENT, this);
 				if(!EditorPointer.touchActive) click();
 			}
 		}

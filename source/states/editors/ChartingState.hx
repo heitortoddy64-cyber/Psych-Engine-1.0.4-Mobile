@@ -4783,7 +4783,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		//trace(id, sender);
 		switch(id)
 		{
-			case PsychUIButton.CLICK_EVENT, PsychUIDropDownMenu.CLICK_EVENT:
+			case PsychUIButton.PRESS_EVENT, PsychUIButton.CLICK_EVENT, PsychUIDropDownMenu.CLICK_EVENT:
 				ignoreClickForThisFrame = true;
 
 			case PsychUIBox.CLICK_EVENT:

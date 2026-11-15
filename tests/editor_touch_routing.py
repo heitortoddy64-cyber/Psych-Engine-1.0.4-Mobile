@@ -11,7 +11,7 @@ FILES={
 'flixel/FlxBasic.hx':'''package flixel; class FlxBasic { public var exists=true;public var active=true;public var visible=true;public var alpha:Float=1;public var cameras:Array<support.Stubs.FlxCamera>;public function new(){} public function update(e:Float){}public function destroy(){exists=false;} }''',
 'flixel/input/keyboard/FlxKey.hx':'''package flixel.input.keyboard; enum abstract FlxKey(Int) from Int to Int {var ESCAPE=27;var ALT=18;var SHIFT=16;var CONTROL=17;var ENTER=13;var UP=38;var DOWN=40;var LEFT=37;var RIGHT=39;var W=87;var C=67;var DELETE=46;public static function fromString(v:String):FlxKey {if(v.length==1)return v.charCodeAt(0);return switch(v){case 'ESCAPE':27;case 'SHIFT':16;case 'CONTROL':17;case 'ENTER':13;case 'UP':38;case 'DOWN':40;case 'LEFT':37;case 'RIGHT':39;case 'DELETE':46;default:200+v.length;};}}''',
 'flixel/input/FlxInput.hx':'''package flixel.input; enum abstract FlxInputState(Int) from Int {var JUST_PRESSED=2;var PRESSED=1;var JUST_RELEASED=-1;var RELEASED=0;}''',
-'flixel/input/FlxPointer.hx':'''package flixel.input; import support.Stubs; class FlxPointer {public var x:Int;public var y:Int;public var screenX:Int;public var screenY:Int;public function new(x=0,y=0){this.x=screenX=x;this.y=screenY=y;}public function getScreenPosition(?c:FlxCamera,?p:FlxPoint):FlxPoint return new FlxPoint(screenX,screenY);public function getWorldPosition(?c:FlxCamera,?p:FlxPoint):FlxPoint return getScreenPosition(c,p);public function getPositionInCameraView(?c:FlxCamera,?p:FlxPoint):FlxPoint return getScreenPosition(c,p);public function overlaps(b:flixel.FlxBasic,?c:FlxCamera):Bool return false;}''',
+'flixel/input/FlxPointer.hx':'''package flixel.input; import support.Stubs; class FlxPointer {public var x:Int;public var y:Int;public var screenX:Int;public var screenY:Int;public function new(x=0,y=0){this.x=screenX=x;this.y=screenY=y;}public function getScreenPosition(?c:FlxCamera,?p:FlxPoint):FlxPoint return new FlxPoint(screenX,screenY);public function getWorldPosition(?c:FlxCamera,?p:FlxPoint):FlxPoint return getScreenPosition(c,p);public function getPositionInCameraView(?c:FlxCamera,?p:FlxPoint):FlxPoint return getScreenPosition(c,p);public function overlaps(b:flixel.FlxBasic,?c:FlxCamera):Bool {var sprite:FlxSprite=cast b;return screenX>=sprite.x&&screenX<sprite.x+sprite.width&&screenY>=sprite.y&&screenY<sprite.y+sprite.height;}}''',
 'flixel/input/touch/FlxTouch.hx':'''package flixel.input.touch; class FlxTouch extends flixel.input.FlxPointer {public var touchPointID:Int;public var pressed=true;public var justPressed=true;public var justReleased=false;public function new(x,y,id){super(x,y);touchPointID=id;}}''',
 'states/editors/content/FileDialogHandler.hx':'''package states.editors.content; class FileDialogHandler {public static var isBusy=false;}''',
 'support/Stubs.hx':'''package support;
@@ -19,12 +19,12 @@ import flixel.FlxBasic;
 class Stubs {}
 class FlxPoint {public var x:Float;public var y:Float;public function new(x:Float=0,y:Float=0){set(x,y);}public function set(x:Float=0,y:Float=0){this.x=x;this.y=y;return this;}}
 class FlxCamera {public var bgColor:Int=0;public var zoom:Float=1;public var scroll=new FlxPoint();public function new(){}}
-class FlxSprite extends FlxBasic {public var x:Float;public var y:Float;public var width:Float=0;public var height:Float=0;public var scrollFactor=new FlxPoint();public function new(x:Float=0,y:Float=0){super();this.x=x;this.y=y;} public function makeGraphic(w:Int,h:Int,color:Int){width=w;height=h;return this;} }
-class FlxSpriteGroup extends FlxSprite {public var members:Array<FlxSprite>=[];public function new(){super();}public function add(s:FlxSprite){members.push(s);return s;}public function remove(s:FlxSprite,splice:Bool){members.remove(s);return s;}}
+class FlxSprite extends FlxBasic {public var x:Float;public var y:Float;public var width:Float=0;public var height:Float=0;public var camera(get,never):FlxCamera;function get_camera():FlxCamera return cameras==null?null:cameras[0];public var color:Int=0;public var scrollFactor=new FlxPoint();public function setGraphicSize(w:Int,h:Int){width=w;height=h;}public function updateHitbox(){}public function new(x:Float=0,y:Float=0){super();this.x=x;this.y=y;} public function makeGraphic(w:Int,h:Int,color:Int){width=w;height=h;return this;} }
+class FlxSpriteGroup extends FlxSprite {public var members:Array<FlxSprite>=[];public function new(x:Float=0,y:Float=0){super(x,y);}public function add(s:FlxSprite){members.push(s);return s;}public function remove(s:FlxSprite,splice:Bool){members.remove(s);return s;}}
 enum abstract FlxTextAlign(String) {var CENTER="center";}
-class FlxText extends FlxSprite {public var alignment:FlxTextAlign;public function new(x:Float,y:Float,w:Float,t:String,size:Int){super(x,y);width=w;}}
-class PsychUIBox extends FlxSpriteGroup {}
-class PsychUIButton extends FlxSpriteGroup {}
+class FlxText extends FlxSprite {public var alignment:FlxTextAlign;public var fieldWidth:Float;public var text:String;public function new(x:Float,y:Float,w:Float,t:String,size:Int=8){super(x,y);width=w;}}
+class FlxColor {public static inline var WHITE:Int=-1;public static inline var BLACK:Int=0xFF000000;}
+class PsychUIDropDownMenu extends PsychUIInputText {public static final CLICK_EVENT="dropdown_click";}
 class PsychUICheckBox extends FlxSpriteGroup {}
 class PsychUISlider extends FlxSpriteGroup {}
 class PsychUIRadioGroup extends FlxSpriteGroup {}
@@ -36,7 +36,7 @@ class Cameras {public var list:Array<FlxCamera>=[];public function new(){}public
 class Plugins {public var list:Array<FlxBasic>=[];public function new(){}public function add<T:FlxBasic>(p:T):T{list.push(p);return p;}public function remove<T:FlxBasic>(p:T):T{list.remove(p);return p;}public function update(){for(p in list.copy())p.update(FlxG.elapsed);}}
 class Mouse extends flixel.input.FlxPointer {public var visible=true;public var pressed=false;public var justPressed=false;public var justReleased=false;public var released=true;public var pressedRight=false;public var justPressedRight=false;public var justReleasedRight=false;public var justMoved=false;public var deltaScreenX=0;public var deltaScreenY=0;public var wheel=0;public function new(){super();}}
 class Keyboard {public function new(){}public function checkStatus(k:flixel.input.keyboard.FlxKey,s:flixel.input.FlxInput.FlxInputState):Bool return false;}
-class FlxG {public static var height=720;public static var elapsed:Float=1/60;public static var cameras=new Cameras();public static var plugins=new Plugins();public static var signals={focusLost:new Signal(),focusGained:new Signal()};public static var touches:{list:Array<flixel.input.touch.FlxTouch>}={list:[]};public static var android={justReleased:{BACK:false}};public static var keys=new Keyboard();public static var mouse=new Mouse();}
+class FlxG {public static var state:Dynamic;public static var height=720;public static var elapsed:Float=1/60;public static var cameras=new Cameras();public static var plugins=new Plugins();public static var signals={focusLost:new Signal(),focusGained:new Signal()};public static var touches:{list:Array<flixel.input.touch.FlxTouch>}={list:[]};public static var android={justReleased:{BACK:false}};public static var keys=new Keyboard();public static var mouse=new Mouse();}
 ''',
 'Routing.hx':'''import mobile.controls.EditorTouchControls;import flixel.input.touch.FlxTouch;import flixel.input.keyboard.FlxKey;import states.editors.content.FileDialogHandler;
 @:access(mobile.controls.EditorTouchControls)
@@ -78,6 +78,19 @@ class Routing {
    check(toolbar.allowFast==(['Character','Stage','Portrait','Splash','Menu Character'].contains(profile)),'fast command exists in '+profile);
    toolbar.destroy();
   }
+  // Run the real button and the real Chart UIEvent method together: press consumes the grid,
+  // release executes once, and a dragged release does not execute the action.
+  var chart=new ChartEvents();FlxG.state=chart;var clicks=0;
+  var button=new PsychUIButton(0,0,'Save',function(){clicks++;},80,30);
+  EditorInput.active=true;EditorInput.touchActive=true;EditorInput.touch=new FlxTouch(10,10,101);
+  EditorPointer.touchDown=true;EditorPointer.touchStarted=true;EditorPointer.touchEnded=false;EditorPointer.blocked=false;
+  button.update(1/60);check(chart.ignoreClickForThisFrame&&clicks==0,'widget initial touch consumes Chart without executing callback');
+  EditorPointer.touchDown=false;EditorPointer.touchStarted=false;EditorPointer.touchEnded=true;button.update(1/60);
+  check(clicks==1&&chart.ignoreClickForThisFrame,'widget release executes once');
+  chart.ignoreClickForThisFrame=false;EditorPointer.touchDown=true;EditorPointer.touchStarted=true;EditorPointer.touchEnded=false;
+  button.update(1/60);check(chart.ignoreClickForThisFrame&&clicks==1,'second widget press consumes Chart');
+  EditorInput.touch.screenX=200;EditorPointer.touchDown=false;EditorPointer.touchStarted=false;EditorPointer.touchEnded=true;button.update(1/60);
+  check(clicks==1,'dragged widget release never executes action');button.destroy();EditorInput.reset();
   Sys.println('PASS: '+assertions+' actual editor routing assertions with headless framework stand-ins; no device/UI test');
  }
 }'''
@@ -86,6 +99,13 @@ with tempfile.TemporaryDirectory(prefix='psych-routing-') as directory:
  work=Path(directory)
  for path,contents in FILES.items():
   p=work/path;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(contents)
- for path in ['mobile/controls/EditorTouchControls.hx','backend/ui/EditorKeyState.hx','backend/ui/EditorInput.hx','backend/ui/EditorPointer.hx']:
+ for path in ['backend/ui/PsychUIButton.hx','backend/ui/PsychUIEventHandler.hx','mobile/controls/EditorTouchControls.hx','backend/ui/EditorKeyState.hx','backend/ui/EditorInput.hx','backend/ui/EditorPointer.hx']:
   p=work/path;p.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/'source'/path,p)
+ chart=(ROOT/'source/states/editors/ChartingState.hx').read_text()
+ start=chart.index('public function UIEvent(');opening=chart.index('{',start);depth=1;end=opening+1
+ while depth:
+  depth+=(chart[end]=='{')-(chart[end]=='}');end+=1
+ (work/'ChartEvents.hx').write_text('class ChartEvents {public var subState:Dynamic;public var ignoreClickForThisFrame=false;var upperBox:Dynamic={};var chartEditorSave:Dynamic={data:{}};var mainBox=new FlxSprite();var infoBox=new FlxSprite();public function new(){}function updateUpperBoxBg(){}'+chart[start:end]+'}')
+ box=work/'backend/ui/PsychUIBox.hx'
+ box.write_text('package backend.ui;typedef UIStyleData={var bgColor:Int;var textColor:Int;var bgAlpha:Float;};class PsychUIBox extends FlxSpriteGroup {public static final CLICK_EVENT="uibox_click";public static final MINIMIZE_EVENT="uibox_minimize";public static final DROP_EVENT="uibox_drop";}')
  subprocess.run(['haxe','-cp',str(work),'-D','mobile','-D','android','-main','Routing','--interp'],check=True)
