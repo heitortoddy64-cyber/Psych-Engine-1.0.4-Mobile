@@ -1,5 +1,7 @@
 package states.editors;
 
+import flixel.input.keyboard.FlxKey;
+
 import backend.StageData;
 import backend.PsychCamera;
 import objects.Character;
@@ -108,10 +110,13 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 		updateSpriteList();
 
 		addHelpScreen();
-		FlxG.mouse.visible = true;
+		EditorPointer.visible = true;
 		animationEditor = new StageEditorAnimationSubstate();
 
 		super.create();
+		#if mobile
+		mobile.controls.EditorTouchControls.install(this, "Stage");
+		#end
 	}
 
 	function loadJsonAssetDirectory()
@@ -1156,6 +1161,24 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 		tab_group.add(new FlxText(stageDropDown.x, stageDropDown.y - 18, 60, 'Stage:'));
 		tab_group.add(reloadStage);
 		tab_group.add(dummyStage);
+		#if android
+		tab_group.add(new PsychUIButton(140,70,'Open JSON',function()
+		{
+			if(FileDialogHandler.isBusy) return;
+			androidFiles.openFiles('application/json',function()
+			{
+				try
+				{
+					var parsed:Dynamic=haxe.Json.parse(androidFiles.data);
+					if(parsed.defaultZoom==null || parsed.boyfriend==null || parsed.opponent==null) throw 'Invalid stage JSON';
+					var defaults:Dynamic=StageData.dummy();
+					for(field in Reflect.fields(defaults)) if(!Reflect.hasField(parsed,field)) Reflect.setField(parsed,field,Reflect.field(defaults,field));
+					MusicBeatState.switchState(new StageEditorState(haxe.io.Path.withoutExtension(androidFiles.path),cast parsed));
+				}
+				catch(e:Dynamic) showOutput('Stage import failed: '+Std.string(e),true);
+			},null,function()showOutput('Android could not open stage JSON',true));
+		}));
+		#end
 		tab_group.add(stageDropDown);
 	}
 	
@@ -1334,7 +1357,7 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 	var outputTime:Float = 0;
 	override function update(elapsed:Float)
 	{
-		if(createPopup.visible && (FlxG.mouse.justPressedRight || (FlxG.mouse.justPressed && !FlxG.mouse.overlaps(createPopup, camHUD))))
+		if(createPopup.visible && (EditorPointer.justPressedRight || (EditorPointer.justPressed && !EditorPointer.overlaps(createPopup, camHUD))))
 			createPopup.visible = createPopup.active = false;
 
 		for (basic in stageSprites)
@@ -1347,7 +1370,7 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 
 		if(PsychUIInputText.focusOn != null) return;
 
-		if(FlxG.keys.justPressed.ESCAPE)
+		if(EditorInput.justPressed(FlxKey.ESCAPE))
 		{
 			if(!unsavedProgress)
 			{
@@ -1358,14 +1381,14 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 			return;
 		}
 
-		if(FlxG.keys.justPressed.W)
+		if(EditorInput.justPressed(FlxKey.W))
 		{
 			spriteListRadioGroup.checked = FlxMath.wrap(spriteListRadioGroup.checked - 1, 0, spriteListRadioGroup.labels.length-1);
 			trace(spriteListRadioGroup.checked);
 			checkUIOnObject();
 			updateSelectedUI();
 		}
-		else if(FlxG.keys.justPressed.S)
+		else if(EditorInput.justPressed(FlxKey.S))
 		{
 			spriteListRadioGroup.checked = FlxMath.wrap(spriteListRadioGroup.checked + 1, 0, spriteListRadioGroup.labels.length-1);
 			trace(spriteListRadioGroup.checked);
@@ -1373,16 +1396,16 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 			updateSelectedUI();
 		}
 
-		if(FlxG.keys.justPressed.F1 || (helpBg.visible && FlxG.keys.justPressed.ESCAPE))
+		if(EditorInput.justPressed(FlxKey.F1) || (helpBg.visible && EditorInput.justPressed(FlxKey.ESCAPE)))
 		{
 			helpBg.visible = !helpBg.visible;
 			helpTexts.visible = helpBg.visible;
 		}
 
 		#if FLX_DEBUG
-		if(FlxG.keys.justPressed.F3)
+		if(EditorInput.justPressed(FlxKey.F3))
 		#else
-		if(FlxG.keys.justPressed.F2)
+		if(EditorInput.justPressed(FlxKey.F2))
 		#end
 		{
 			UI_box.visible = !UI_box.visible;
@@ -1397,22 +1420,22 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 			spriteListRadioGroup.updateRadioItems();
 		}
 		
-		if(FlxG.keys.justPressed.F12)
+		if(EditorInput.justPressed(FlxKey.F12))
 			showSelectionQuad = !showSelectionQuad;
 		
 		var shiftMult:Float = 1;
 		var ctrlMult:Float = 1;
-		if(FlxG.keys.pressed.SHIFT) shiftMult = 4;
-		if(FlxG.keys.pressed.CONTROL) ctrlMult = 0.25;
+		if(EditorInput.pressed(FlxKey.SHIFT)) shiftMult = 4;
+		if(EditorInput.pressed(FlxKey.CONTROL)) ctrlMult = 0.25;
 
 		// CAMERA CONTROLS
 		var camX:Float = 0;
 		var camY:Float = 0;
 		var camMove:Float = elapsed * 500 * shiftMult * ctrlMult;
-		if (FlxG.keys.pressed.J) camX -= camMove;
-		if (FlxG.keys.pressed.K) camY += camMove;
-		if (FlxG.keys.pressed.L) camX += camMove;
-		if (FlxG.keys.pressed.I) camY -= camMove;
+		if (EditorInput.pressed(FlxKey.J)) camX -= camMove;
+		if (EditorInput.pressed(FlxKey.K)) camY += camMove;
+		if (EditorInput.pressed(FlxKey.L)) camX += camMove;
+		if (EditorInput.pressed(FlxKey.I)) camY -= camMove;
 
 		if(camX != 0 || camY != 0)
 		{
@@ -1423,30 +1446,30 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 		}
 
 		var lastZoom = FlxG.camera.zoom;
-		if(FlxG.keys.justPressed.R && !FlxG.keys.pressed.CONTROL)
+		if(EditorInput.justPressed(FlxKey.R) && !EditorInput.pressed(FlxKey.CONTROL))
 			FlxG.camera.zoom = stageJson.defaultZoom;
-		else if (FlxG.keys.pressed.E && FlxG.camera.zoom < maxZoom)
+		else if (EditorInput.pressed(FlxKey.E) && FlxG.camera.zoom < maxZoom)
 			FlxG.camera.zoom = Math.min(maxZoom, FlxG.camera.zoom + elapsed * FlxG.camera.zoom * shiftMult * ctrlMult);
-		else if (FlxG.keys.pressed.Q && FlxG.camera.zoom > minZoom)
+		else if (EditorInput.pressed(FlxKey.Q) && FlxG.camera.zoom > minZoom)
 			FlxG.camera.zoom = Math.max(minZoom, FlxG.camera.zoom - elapsed * FlxG.camera.zoom * shiftMult * ctrlMult);
 		
 		// SPRITE X/Y
 		var shiftMult:Float = 1;
 		var ctrlMult:Float = 1;
-		if(FlxG.keys.pressed.SHIFT) shiftMult = 4;
-		if(FlxG.keys.pressed.CONTROL) ctrlMult = 0.2;
+		if(EditorInput.pressed(FlxKey.SHIFT)) shiftMult = 4;
+		if(EditorInput.pressed(FlxKey.CONTROL)) ctrlMult = 0.2;
 
 		var moveX:Float = 0;
 		var moveY:Float = 0;
-		if (FlxG.keys.justPressed.LEFT) moveX -= 5 * shiftMult * ctrlMult;
-		if (FlxG.keys.justPressed.RIGHT) moveX += 5 * shiftMult * ctrlMult;
-		if (FlxG.keys.justPressed.UP) moveY -= 5 * shiftMult * ctrlMult;
-		if (FlxG.keys.justPressed.DOWN) moveY += 5 * shiftMult * ctrlMult;
+		if (EditorInput.justPressed(FlxKey.LEFT)) moveX -= 5 * shiftMult * ctrlMult;
+		if (EditorInput.justPressed(FlxKey.RIGHT)) moveX += 5 * shiftMult * ctrlMult;
+		if (EditorInput.justPressed(FlxKey.UP)) moveY -= 5 * shiftMult * ctrlMult;
+		if (EditorInput.justPressed(FlxKey.DOWN)) moveY += 5 * shiftMult * ctrlMult;
 
-		if(FlxG.mouse.pressedRight && (FlxG.mouse.deltaScreenX != 0 || FlxG.mouse.deltaScreenY != 0))
+		if(EditorPointer.pressedRight && (EditorPointer.deltaScreenX != 0 || EditorPointer.deltaScreenY != 0))
 		{
-			moveX += FlxG.mouse.deltaScreenX * ctrlMult;
-			moveY += FlxG.mouse.deltaScreenY * ctrlMult;
+			moveX += EditorPointer.deltaScreenX * ctrlMult;
+			moveY += EditorPointer.deltaScreenY * ctrlMult;
 			_updateCamera();
 		}
 
@@ -1599,8 +1622,17 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 			stageJson.objects.push(basic.formatToJson());
 	}
 
+	#if android
+	var androidFiles=new FileDialogHandler();
+	#end
 	function saveData()
 	{
+		#if android
+		if(FileDialogHandler.isBusy) return;
+		saveObjectsToJson();
+		androidFiles.saveAndroid('$lastLoadedStage.json',haxe.Json.stringify(stageJson,'\t'),function(){unsavedProgress=false;showOutput('Stage saved');},null,function()showOutput('Android could not save stage',true));
+		return;
+		#end
 		if(_file != null) return;
 
 		saveObjectsToJson();
@@ -1653,6 +1685,21 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 
 	var _makeNewSprite = null;
 	public function loadImage(onNewSprite:String = null) {
+		#if android
+		states.editors.content.EditorFileTools.importImage(androidFiles,function(image)
+		{
+			if(onNewSprite!=null)
+			{
+				if(onNewSprite=='animatedSprite' && !Paths.fileExists('images/$image.xml',TEXT) && !Paths.fileExists('images/$image.json',TEXT) && !Paths.fileExists('images/$image.txt',TEXT))
+				{showOutput('PNG imported. Import its matching XML/JSON/TXT to create an animated sprite.',true);return;}
+				insertMeta(new StageEditorMetaSprite({type:onNewSprite,name:findUnoccupiedName()},new ModchartSprite()));
+			}
+			var selected=getSelected();tryLoadImage(selected,image);
+			if(selected!=null && onNewSprite!=null) {selected.sprite.x=camGame.scroll.x+FlxG.width/2-selected.sprite.width/2;selected.sprite.y=camGame.scroll.y+FlxG.height/2-selected.sprite.height/2;}
+			unsavedProgress=true;showOutput('Imported '+image+' into the selected mod images folder');
+		},function(error)showOutput(error,true));
+		return;
+		#end
 		if(_file != null) return;
 
 		_makeNewSprite = onNewSprite;
@@ -1829,6 +1876,9 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 	{
 		destroySubStates = true;
 		animationEditor.destroy();
+		#if android
+		androidFiles.destroy();
+		#end
 		super.destroy();
 	}
 }
@@ -2275,9 +2325,9 @@ class StageEditorAnimationSubstate extends MusicBeatSubstate {
 		if(target.animations.length > 1)
 		{
 			var changedAnim:Bool = false;
-			if(FlxG.keys.justPressed.W && (changedAnim = true)) curAnim--;
-			else if(FlxG.keys.justPressed.S && (changedAnim = true)) curAnim++;
-			else if(FlxG.keys.justPressed.SPACE) changedAnim = true;
+			if(EditorInput.justPressed(FlxKey.W) && (changedAnim = true)) curAnim--;
+			else if(EditorInput.justPressed(FlxKey.S) && (changedAnim = true)) curAnim++;
+			else if(EditorInput.justPressed(FlxKey.SPACE)) changedAnim = true;
 
 			if(changedAnim)
 			{
@@ -2290,12 +2340,12 @@ class StageEditorAnimationSubstate extends MusicBeatSubstate {
 		var shiftMult:Float = 1;
 		var ctrlMult:Float = 1;
 		var shiftMultBig:Float = 1;
-		if(FlxG.keys.pressed.SHIFT)
+		if(EditorInput.pressed(FlxKey.SHIFT))
 		{
 			shiftMult = 4;
 			shiftMultBig = 10;
 		}
-		if(FlxG.keys.pressed.CONTROL) ctrlMult = 0.25;
+		if(EditorInput.pressed(FlxKey.CONTROL)) ctrlMult = 0.25;
 
 		// OFFSET
 		if(target.sprite.animation.curAnim != null)
@@ -2303,8 +2353,8 @@ class StageEditorAnimationSubstate extends MusicBeatSubstate {
 			var spr:ModchartSprite = cast (target.sprite, ModchartSprite);
 			var anim:String = spr.animation.curAnim.name;
 			var changedOffset = false;
-			var moveKeysP = [FlxG.keys.justPressed.LEFT, FlxG.keys.justPressed.RIGHT, FlxG.keys.justPressed.UP, FlxG.keys.justPressed.DOWN];
-			var moveKeys = [FlxG.keys.pressed.LEFT, FlxG.keys.pressed.RIGHT, FlxG.keys.pressed.UP, FlxG.keys.pressed.DOWN];
+			var moveKeysP = [EditorInput.justPressed(FlxKey.LEFT), EditorInput.justPressed(FlxKey.RIGHT), EditorInput.justPressed(FlxKey.UP), EditorInput.justPressed(FlxKey.DOWN)];
+			var moveKeys = [EditorInput.pressed(FlxKey.LEFT), EditorInput.pressed(FlxKey.RIGHT), EditorInput.pressed(FlxKey.UP), EditorInput.pressed(FlxKey.DOWN)];
 			if(moveKeysP.contains(true))
 			{
 				if(spr.animOffsets.get(anim) != null)
@@ -2337,14 +2387,14 @@ class StageEditorAnimationSubstate extends MusicBeatSubstate {
 			}
 			else holdingArrowsTime = 0;
 	
-			if(FlxG.mouse.pressedRight && (FlxG.mouse.deltaScreenX != 0 || FlxG.mouse.deltaScreenY != 0))
+			if(EditorPointer.pressedRight && (EditorPointer.deltaScreenX != 0 || EditorPointer.deltaScreenY != 0))
 			{
-				spr.offset.x -= FlxG.mouse.deltaScreenX;
-				spr.offset.y -= FlxG.mouse.deltaScreenY;
+				spr.offset.x -= EditorPointer.deltaScreenX;
+				spr.offset.y -= EditorPointer.deltaScreenY;
 				changedOffset = true;
 			}
 
-			if (FlxG.keys.justPressed.R && FlxG.keys.pressed.CONTROL)
+			if (EditorInput.justPressed(FlxKey.R) && EditorInput.pressed(FlxKey.CONTROL))
 			{
 				target.animations[curAnim].offsets = null;
 				spr.animOffsets.remove(anim);
@@ -2372,10 +2422,10 @@ class StageEditorAnimationSubstate extends MusicBeatSubstate {
 		var camX:Float = 0;
 		var camY:Float = 0;
 		var camMove:Float = elapsed * 500 * shiftMult * ctrlMult;
-		if (FlxG.keys.pressed.J) camX -= camMove;
-		if (FlxG.keys.pressed.K) camY += camMove;
-		if (FlxG.keys.pressed.L) camX += camMove;
-		if (FlxG.keys.pressed.I) camY -= camMove;
+		if (EditorInput.pressed(FlxKey.J)) camX -= camMove;
+		if (EditorInput.pressed(FlxKey.K)) camY += camMove;
+		if (EditorInput.pressed(FlxKey.L)) camX += camMove;
+		if (EditorInput.pressed(FlxKey.I)) camY -= camMove;
 
 		if(camX != 0 || camY != 0)
 		{
@@ -2384,14 +2434,14 @@ class StageEditorAnimationSubstate extends MusicBeatSubstate {
 		}
 
 		var lastZoom = FlxG.camera.zoom;
-		if(FlxG.keys.justPressed.R && !FlxG.keys.pressed.CONTROL)
+		if(EditorInput.justPressed(FlxKey.R) && !EditorInput.pressed(FlxKey.CONTROL))
 			FlxG.camera.zoom = 0.5;
-		else if (FlxG.keys.pressed.E && FlxG.camera.zoom < maxZoom)
+		else if (EditorInput.pressed(FlxKey.E) && FlxG.camera.zoom < maxZoom)
 			FlxG.camera.zoom = Math.min(maxZoom, FlxG.camera.zoom + elapsed * FlxG.camera.zoom * shiftMult * ctrlMult);
-		else if (FlxG.keys.pressed.Q && FlxG.camera.zoom > minZoom)
+		else if (EditorInput.pressed(FlxKey.Q) && FlxG.camera.zoom > minZoom)
 			FlxG.camera.zoom = Math.max(minZoom, FlxG.camera.zoom - elapsed * FlxG.camera.zoom * shiftMult * ctrlMult);
 
-		if(FlxG.keys.justPressed.ESCAPE)
+		if(EditorInput.justPressed(FlxKey.ESCAPE))
 		{
 			persistentDraw = true;
 			close();

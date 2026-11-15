@@ -18,6 +18,7 @@ class PsychUIDropDownMenu extends PsychUIInputText
 	public function new(x:Float, y:Float, list:Array<String>, callback:Int->String->Void, ?width:Float = 100)
 	{
 		super(x, y);
+		showKeyboardOnFocus = false;
 		if(list == null) list = [];
 
 		_itemWidth = width - 2;
@@ -84,13 +85,14 @@ class PsychUIDropDownMenu extends PsychUIInputText
 
 	var _items:Array<PsychUIDropDownItem> = [];
 	public var curScroll:Int = 0;
+	var dragScroll:Float = 0;
 	override function update(elapsed:Float)
 	{
 		var lastFocus = PsychUIInputText.focusOn;
 		super.update(elapsed);
-		if(FlxG.mouse.justPressed)
+		if(EditorPointer.justPressed)
 		{
-			if(FlxG.mouse.overlaps(button, camera))
+			if(EditorPointer.overlaps(button, camera))
 			{
 				button.animation.play('pressed', true);
 				if(lastFocus != this)
@@ -99,7 +101,7 @@ class PsychUIDropDownMenu extends PsychUIInputText
 					PsychUIInputText.focusOn = null;
 			}
 		}
-		else if(FlxG.mouse.released && button.animation.curAnim != null && button.animation.curAnim.name != 'normal') button.animation.play('normal', true);
+		else if(EditorPointer.released && button.animation.curAnim != null && button.animation.curAnim.name != 'normal') button.animation.play('normal', true);
 
 		if(lastFocus != PsychUIInputText.focusOn)
 		{
@@ -107,16 +109,24 @@ class PsychUIDropDownMenu extends PsychUIInputText
 		}
 		else if(PsychUIInputText.focusOn == this)
 		{
-			var wheel:Int = FlxG.mouse.wheel;
+			var wheel:Int = EditorPointer.wheel;
+			if(EditorPointer.touchActive && EditorPointer.pressed)
+			{
+				dragScroll += EditorPointer.deltaScreenY / camera.zoom;
+				if(Math.abs(dragScroll)>=24) { wheel += Std.int(dragScroll/24); dragScroll %= 24; }
+			}
+			else dragScroll = 0;
 			if(FlxG.keys.justPressed.UP) wheel++;
 			if(FlxG.keys.justPressed.DOWN) wheel--;
 			if(wheel != 0) showDropDown(true, curScroll - wheel, _curFilter);
+			if(EditorPointer.touchActive && EditorPointer.justPressed && !EditorPointer.overlaps(behindText,camera) && !EditorPointer.overlaps(button,camera)
+				&& !Lambda.exists(_items, function(item) return item.visible && EditorPointer.overlaps(item.bg,camera))) PsychUIInputText.focusOn=null;
 		}
 	}
 
 	private function showDropDownClickFix()
 	{
-		if(FlxG.mouse.justPressed)
+		if(EditorPointer.justPressed)
 		{
 			for (item in _items) //extra update to fix a little bug where it wouldnt click on any option if another input text was behind the drop down
 				if(item != null && item.active && item.visible)
@@ -248,12 +258,25 @@ class PsychUIDropDownItem extends FlxSpriteGroup
 
 	public var onClick:Void->Void;
 	public var forceNextUpdate:Bool = false;
+	var touchCandidate:Bool = false;
+	var startX:Float = 0;
+	var startY:Float = 0;
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-		if(FlxG.mouse.justMoved || FlxG.mouse.justPressed || forceNextUpdate)
+		if(EditorPointer.touchActive)
 		{
-			var overlapped:Bool = (FlxG.mouse.overlaps(bg, camera));
+			if(EditorPointer.justPressed && EditorPointer.overlaps(bg,camera))
+			{
+				touchCandidate=true;startX=EditorPointer.screenX;startY=EditorPointer.screenY;
+				PsychUIEventHandler.event(PsychUIButton.PRESS_EVENT, this);
+			}
+			if(touchCandidate && (Math.abs(EditorPointer.screenX-startX)>18 || Math.abs(EditorPointer.screenY-startY)>18)) touchCandidate=false;
+			if(EditorPointer.justReleased) { var select=touchCandidate && EditorPointer.overlaps(bg,camera);touchCandidate=false;if(select && onClick!=null) onClick(); }
+		}
+		if(EditorPointer.justMoved || EditorPointer.justPressed || forceNextUpdate)
+		{
+			var overlapped:Bool = (EditorPointer.overlaps(bg, camera));
 
 			var style = overlapped ? hoverStyle : normalStyle;
 			bg.color = style.bgColor;
@@ -261,7 +284,7 @@ class PsychUIDropDownItem extends FlxSpriteGroup
 			bg.alpha = style.bgAlpha;
 			forceNextUpdate = false;
 
-			if(overlapped && FlxG.mouse.justPressed)
+			if(overlapped && EditorPointer.justPressed && !EditorPointer.touchActive)
 				onClick();
 		}
 		

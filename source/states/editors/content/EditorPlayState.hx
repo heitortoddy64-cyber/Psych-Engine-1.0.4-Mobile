@@ -165,7 +165,7 @@ class EditorPlayState extends MusicBeatSubstate
 
 	override function update(elapsed:Float)
 	{
-		if(controls.BACK || FlxG.keys.justPressed.ESCAPE || FlxG.keys.justPressed.F12)
+		if(controls.BACK || EditorInput.justPressed(FlxKey.ESCAPE) || EditorInput.justPressed(FlxKey.F12))
 		{
 			endSong();
 			super.update(elapsed);

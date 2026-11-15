@@ -13,7 +13,7 @@ class ExitConfirmationPrompt extends Prompt
 	{
 		super('There\'s unsaved progress,\nare you sure you want to exit?', function()
 		{
-			FlxG.mouse.visible = false;
+			EditorPointer.visible = false;
 			MusicBeatState.switchState(new states.editors.MasterEditorMenu());
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			if(finishCallback != null) finishCallback();
@@ -44,6 +44,9 @@ class Prompt extends BasePrompt
 			yesFunction();
 			close();
 		});
+		#if mobile
+		btn.resize(160,56);btn.text.size=22;
+		#end
 		btn.normalStyle.bgColor = FlxColor.RED;
 		btn.normalStyle.textColor = FlxColor.WHITE;
 		btn.screenCenter(X);
@@ -52,6 +55,9 @@ class Prompt extends BasePrompt
 		add(btn);
 
 		var btn:PsychUIButton = new PsychUIButton(0, btnY, _noTxt, close);
+		#if mobile
+		btn.resize(160,56);btn.text.size=22;
+		#end
 		btn.screenCenter(X);
 		btn.x += 100;
 		btn.cameras = cameras;
@@ -129,7 +135,7 @@ class BasePrompt extends MusicBeatSubstate
 		super.update(elapsed);
 
 		_blockInput = Math.max(0, _blockInput - elapsed);
-		if(_blockInput <= 0 && FlxG.keys.justPressed.ESCAPE)
+		if(_blockInput <= 0 && EditorInput.justPressed(flixel.input.keyboard.FlxKey.ESCAPE))
 		{
 			close();
 			return;

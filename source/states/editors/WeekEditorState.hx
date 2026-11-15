@@ -1,5 +1,7 @@
 package states.editors;
 
+import flixel.input.keyboard.FlxKey;
+
 import backend.WeekData;
 
 import openfl.utils.Assets;
@@ -97,9 +99,12 @@ class WeekEditorState extends MusicBeatState implements PsychUIEventHandler.Psyc
 		addEditorBox();
 		reloadAllShit();
 
-		FlxG.mouse.visible = true;
+		EditorPointer.visible = true;
 
 		super.create();
+		#if mobile
+		mobile.controls.EditorTouchControls.install(this, "Week");
+		#end
 	}
 
 	var UI_box:PsychUIBox;
@@ -398,7 +403,7 @@ class WeekEditorState extends MusicBeatState implements PsychUIEventHandler.Psyc
 		if(PsychUIInputText.focusOn == null)
 		{
 			ClientPrefs.toggleVolumeKeys(true);
-			if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
+			if(EditorInput.justPressed(FlxKey.ESCAPE) #if android || EditorInput.backPressed() #end)
 			{
 				if(!unsavedProgress)
 				{
@@ -807,7 +812,7 @@ class WeekEditorFreeplayState extends MusicBeatState implements PsychUIEventHand
 		else
 		{
 			ClientPrefs.toggleVolumeKeys(true);
-			if(FlxG.keys.justPressed.ESCAPE #if mobile || virtualPad.getButton('buttonB').justPressed #end) {
+			if(EditorInput.justPressed(FlxKey.ESCAPE) #if mobile || virtualPad.getButton('buttonB').justPressed #end) {
 				if(!WeekEditorState.unsavedProgress)
 				{
 					MusicBeatState.switchState(new MasterEditorMenu());
@@ -816,8 +821,8 @@ class WeekEditorFreeplayState extends MusicBeatState implements PsychUIEventHand
 				else openSubState(new ExitConfirmationPrompt());
 			}
 
-			if(controls.UI_UP_P) changeSelection(-1);
-			if(controls.UI_DOWN_P) changeSelection(1);
+			if(controls.UI_UP_P || EditorInput.justPressed(FlxKey.UP)) changeSelection(-1);
+			if(controls.UI_DOWN_P || EditorInput.justPressed(FlxKey.DOWN)) changeSelection(1);
 		}
 		super.update(elapsed);
 	}

@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.app.ProgressDialog;
 import android.net.Uri;
+import android.database.Cursor;
+import android.provider.OpenableColumns;
+import android.util.Base64;
 import android.os.Handler;
 import android.os.Looper;
 import org.haxe.extension.Extension;
@@ -27,15 +30,13 @@ public class FileUtils extends Extension {
     private static boolean downloadSuccess = false;
     private static boolean isFinished = false;
     private static String contentToSave = "";
+    private static boolean binaryRead = false;
     private static String saveFileName = "";
 
     public static org.haxe.lime.HaxeObject callbackObject;
 
     public static void saveFile(final String fileName, final String data, final org.haxe.lime.HaxeObject callback) {
-        if (data == null || data.isEmpty())
-            return;
-
-        contentToSave = data;
+        contentToSave = data == null ? "" : data;
         saveFileName = fileName;
         callbackObject = callback;
 
@@ -50,15 +51,27 @@ public class FileUtils extends Extension {
 
                     if (Extension.mainActivity != null) {
                         Extension.mainActivity.startActivityForResult(intent, CREATE_FILE_CODE);
+                    } else {
+                        notifyCallback("onFileError", new Object[] {});
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    notifyCallback("onFileError", new Object[] {});
                 }
             }
         });
     }
 
     public static void browseFiles(final String mimeType, final org.haxe.lime.HaxeObject callback) {
+        browse(mimeType, callback, false);
+    }
+
+    public static void browseBinaryFiles(final String mimeType, final org.haxe.lime.HaxeObject callback) {
+        browse(mimeType, callback, true);
+    }
+
+    private static void browse(final String mimeType, final org.haxe.lime.HaxeObject callback, boolean binary) {
+        binaryRead = binary;
         callbackObject = callback;
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
@@ -70,9 +83,12 @@ public class FileUtils extends Extension {
 
                     if (Extension.mainActivity != null) {
                         Extension.mainActivity.startActivityForResult(intent, PICK_FILE_CODE);
+                    } else {
+                        notifyCallback("onFileError", new Object[] {});
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    notifyCallback("onFileError", new Object[] {});
                 }
             }
         });
@@ -85,7 +101,7 @@ public class FileUtils extends Extension {
                 Uri uri = data.getData();
                 if (uri != null) {
                     writeFileToUri(uri);
-                }
+                } else { notifyCallback("onFileError", new Object[] {}); }
             } else {
                 contentToSave = "";
                 notifyCallback("onFileCancelled", new Object[] {});
@@ -98,7 +114,7 @@ public class FileUtils extends Extension {
                 Uri uri = data.getData();
                 if (uri != null && callbackObject != null) {
                     readBytesFromUri(uri);
-                }
+                } else { notifyCallback("onFileError", new Object[] {}); }
             } else {
                 notifyCallback("onFileCancelled", new Object[] {});
             }
@@ -113,9 +129,8 @@ public class FileUtils extends Extension {
             @Override
             public void run() {
                 try {
-                    OutputStream fileOutputStream = Extension.mainActivity.getContentResolver().openOutputStream(uri);
-
-                    if (fileOutputStream != null) {
+                    try (OutputStream fileOutputStream = Extension.mainActivity.getContentResolver().openOutputStream(uri, "wt")) {
+                        if (fileOutputStream == null) throw new java.io.IOException("No output stream");
                         byte[] bytesToWrite = contentToSave.getBytes("UTF-8");
 
                         fileOutputStream.write(bytesToWrite);
@@ -138,8 +153,9 @@ public class FileUtils extends Extension {
             @Override
             public void run() {
                 try {
-                    InputStream inputStream = Extension.mainActivity.getContentResolver().openInputStream(uri);
-                    ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+                    try (InputStream inputStream = Extension.mainActivity.getContentResolver().openInputStream(uri);
+                         ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream()) {
+                    if (inputStream == null) throw new java.io.IOException("No input stream");
 
                     byte[] buffer = new byte[1024];
                     int len;
@@ -147,13 +163,25 @@ public class FileUtils extends Extension {
                         byteBuffer.write(buffer, 0, len);
                     }
 
-                    final String fileContent = new String(byteBuffer.toByteArray(), "UTF-8");
-                    final String fileName = "file.json";
+                    final byte[] bytes = byteBuffer.toByteArray();
+                    final String fileContent = binaryRead ? Base64.encodeToString(bytes, Base64.NO_WRAP) : new String(bytes, "UTF-8");
+                    String fileName = uri.getLastPathSegment();
+                    try (Cursor cursor = Extension.mainActivity.getContentResolver().query(uri, null, null, null, null)) {
+                        if (cursor != null && cursor.moveToFirst()) {
+                            int column = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                            if (column >= 0) fileName = cursor.getString(column);
+                        }
+                    }
+                    if (fileName == null) fileName = binaryRead ? "import.png" : "import.json";
+                    // Return a leaf name, never a provider-controlled filesystem path.
+                    fileName = fileName.replace('\\', '/');
+                    fileName = fileName.substring(fileName.lastIndexOf('/') + 1);
 
                     notifyCallback("onFileSelected", new Object[] { fileContent, fileName });
 
                     inputStream.close();
                     byteBuffer.close();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     notifyCallback("onFileError", new Object[] {});
@@ -170,6 +198,8 @@ public class FileUtils extends Extension {
             @Override
             public void run() {
                 if (callbackObject == callback) {
+                    callbackObject = null;
+                    contentToSave = "";
                     callback.call(method, args);
                 }
             }

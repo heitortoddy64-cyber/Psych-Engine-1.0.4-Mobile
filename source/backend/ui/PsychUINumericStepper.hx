@@ -49,22 +49,22 @@ class PsychUINumericStepper extends PsychUIInputText
 	{
 		super.update(elapsed);
 
-		if(FlxG.mouse.justPressed)
+		if(EditorPointer.justPressed)
 		{
-			if(buttonPlus != null && buttonPlus.exists && FlxG.mouse.overlaps(buttonPlus, camera))
+			if(buttonPlus != null && buttonPlus.exists && EditorPointer.overlaps(buttonPlus, camera))
 			{
 				buttonPlus.animation.play('pressed');
 				value += step;
 				_internalOnChange();
 			}
-			else if(buttonMinus != null && buttonMinus.exists && FlxG.mouse.overlaps(buttonMinus, camera))
+			else if(buttonMinus != null && buttonMinus.exists && EditorPointer.overlaps(buttonMinus, camera))
 			{
 				buttonMinus.animation.play('pressed');
 				value -= step;
 				_internalOnChange();
 			}
 		}
-		else if(FlxG.mouse.released)
+		else if(EditorPointer.released)
 		{
 			if(buttonPlus != null && buttonPlus.exists && buttonPlus.animation.curAnim != null && buttonPlus.animation.curAnim.name != 'normal')
 				buttonPlus.animation.play('normal');

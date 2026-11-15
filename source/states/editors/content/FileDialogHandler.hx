@@ -18,6 +18,11 @@ import lime.system.JNI;
 //Currently only supports OPEN and SAVE, might change that in the future, who knows
 class FileDialogHandler extends FlxBasic
 {
+	static var pending:Int = 0;
+	public static var isBusy(get, never):Bool;
+	static function get_isBusy():Bool return pending > 0;
+	function finish() { if(!completed) pending--; completed = true; }
+
 	var _fileRef:FileReferenceCustom;
 	var _dialogMode:FileDialogType = OPEN;
 	public function new()
@@ -28,10 +33,10 @@ class FileDialogHandler extends FlxBasic
 		
 		#if android
 		_androidCallback = {
-			onFileSelected: function(rawData:String, fileName:String):Void onFileCompleteA(rawData, fileName),
-			onFileSaved: function(fileName:String):Void onSaveCompleteA(fileName),
-			onFileCancelled: function():Void onCancelA(),
-			onFileError: function():Void onErrorA()
+			onFileSelected: function(rawData:String, fileName:String):Void { if(exists) onFileCompleteA(rawData, fileName); },
+			onFileSaved: function(fileName:String):Void { if(exists) onSaveCompleteA(fileName); },
+			onFileCancelled: function():Void { if(exists) onCancelA(); },
+			onFileError: function():Void { if(exists) onErrorA(); }
 		};
 		#end
 
@@ -47,12 +52,16 @@ class FileDialogHandler extends FlxBasic
 
 	#if android
 	private static var _browseFiles = JNI.createStaticMethod('mobile.backend.java.FileUtils', 'browseFiles', '(Ljava/lang/String;Lorg/haxe/lime/HaxeObject;)V');
+	private static var _browseBinary = JNI.createStaticMethod('mobile.backend.java.FileUtils', 'browseBinaryFiles', '(Ljava/lang/String;Lorg/haxe/lime/HaxeObject;)V');
 	private static var _saveFile = JNI.createStaticMethod('mobile.backend.java.FileUtils', 'saveFile', '(Ljava/lang/String;Ljava/lang/String;Lorg/haxe/lime/HaxeObject;)V');
 	var _androidCallback:Dynamic;
 	#end
 
 	public function save(?fileName:String = '', ?dataToSave:String = '', ?onComplete:Void->Void, ?onCancel:Void->Void, ?onError:Void->Void)
 	{
+		#if android
+		saveAndroid(fileName, dataToSave, onComplete, onCancel, onError); return;
+		#end
 		if(!completed)
 		{
 			throw new Exception('You must finish previous operation before starting a new one.');
@@ -69,6 +78,9 @@ class FileDialogHandler extends FlxBasic
 
 	public function open(?defaultName:String = null, ?title:String = null, ?filter:Array<FileFilter> = null, ?onComplete:Void->Void, ?onCancel:Void->Void, ?onError:Void->Void)
 	{
+		#if android
+		openFiles('application/json', onComplete, onCancel, onError); return;
+		#end
 		if(!completed)
 		{
 			throw new Exception('You must finish previous operation before starting a new one.');
@@ -97,6 +109,13 @@ class FileDialogHandler extends FlxBasic
 		_browseFiles(mimeType, _androidCallback);
 	}
 
+	/** Binary content is returned as Base64 in data; never decode an image as UTF-8. */
+	public function openBinary(mimeType:String, onComplete:Void->Void, ?onCancel:Void->Void, ?onError:Void->Void)
+	{
+		_startUp(onComplete, onCancel, onError);
+		_browseBinary(mimeType, _androidCallback);
+	}
+
 	public function saveAndroid(fileName:String, dataToSave:String, ?onComplete:Void->Void, ?onCancel:Void->Void, ?onError:Void->Void):Void
 	{
 		if(!completed)
@@ -104,7 +123,7 @@ class FileDialogHandler extends FlxBasic
 
 		_dialogMode = SAVE;
 		_startUp(onComplete, onCancel, onError);
-		_saveFile(fileName, dataToSave, _androidCallback);
+		_saveFile(haxe.io.Path.withoutDirectory(fileName.replace('\\','/')), dataToSave, _androidCallback);
 	}
 	#end
 
@@ -121,7 +140,7 @@ class FileDialogHandler extends FlxBasic
 		removeEvents();
 		_currentEvent = onLoadDirectoryComplete;
 		_fileRef.addEventListener(#if desktop Event.SELECT #else Event.COMPLETE #end, _currentEvent);
-		_fileRef.browseEx(OPEN_DIRECTORY, null, title);
+		if(!_fileRef.browseEx(OPEN_DIRECTORY, null, title)) onErrorFn(null);
 	}
 
 	public var data:String;
@@ -131,11 +150,10 @@ class FileDialogHandler extends FlxBasic
 	{
 		@:privateAccess
 		this.path = _fileRef._trackSavedPath;
-		this.completed = true;
+		finish();
 		trace('Saved file to: $path');
 
 		removeEvents();
-		this.completed = true;
 		if(onComplete != null) onComplete();
 	}
 
@@ -144,11 +162,10 @@ class FileDialogHandler extends FlxBasic
 		@:privateAccess
 		this.path = _fileRef.__path;
 		this.data = File.getContent(this.path);
-		this.completed = true;
+		finish();
 		trace('Loaded file from: $path');
 
 		removeEvents();
-		this.completed = true;
 		if(onComplete != null)
 			onComplete();
 	}
@@ -157,11 +174,10 @@ class FileDialogHandler extends FlxBasic
 	{
 		@:privateAccess
 		this.path = _fileRef.__path;
-		this.completed = true;
+		finish();
 		trace('Loaded directory: $path');
 
 		removeEvents();
-		this.completed = true;
 		if(onComplete != null)
 			onComplete();
 	}
@@ -169,14 +185,14 @@ class FileDialogHandler extends FlxBasic
 	function onCancelFn(_)
 	{
 		removeEvents();
-		this.completed = true;
+		finish();
 		if(onCancel != null) onCancel();
 	}
 
 	function onErrorFn(_)
 	{
 		removeEvents();
-		this.completed = true;
+		finish();
 		if(onError != null) onError();
 	}
 
@@ -185,33 +201,35 @@ class FileDialogHandler extends FlxBasic
 	{
 		data = rawData;
 		path = fileName;
-		completed = true;
+		finish();
 		if(onComplete != null) onComplete();
 	}
 
 	function onSaveCompleteA(fileName:String):Void
 	{
 		path = fileName;
-		completed = true;
+		finish();
 		trace('Saved file to: $path');
 		if(onComplete != null) onComplete();
 	}
 
 	function onCancelA():Void
 	{
-		completed = true;
+		finish();
 		if(onCancel != null) onCancel();
 	}
 
 	function onErrorA():Void
 	{
-		completed = true;
+		finish();
 		if(onError != null) onError();
 	}
 	#end
 
 	function _startUp(onComplete:Void->Void, onCancel:Void->Void, onError:Void->Void)
 	{
+		if(isBusy) throw new Exception('A file picker is already open.');
+		pending++;
 		this.onComplete = onComplete;
 		this.onCancel = onCancel;
 		this.onError = onError;
@@ -242,7 +260,7 @@ class FileDialogHandler extends FlxBasic
 		#if android
 		_androidCallback = null;
 		#end
-		completed = true;
+		finish();
 		super.destroy();
 	}
 }

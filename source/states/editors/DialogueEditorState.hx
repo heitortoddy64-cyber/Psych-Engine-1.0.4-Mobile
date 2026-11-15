@@ -1,5 +1,7 @@
 package states.editors;
 
+import flixel.input.keyboard.FlxKey;
+
 import flash.net.FileFilter;
 import haxe.Json;
 
@@ -59,7 +61,7 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 		add(box);
 
 		addEditorBox();
-		FlxG.mouse.visible = true;
+		EditorPointer.visible = true;
 
 		#if desktop
 		var addLineText:FlxText = new FlxText(10, 10, FlxG.width - 20,
@@ -92,6 +94,9 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 		#end
 
 		super.create();
+		#if mobile
+		mobile.controls.EditorTouchControls.install(this, "Dialogue");
+		#end
 	}
 
 	var UI_box:PsychUIBox;
@@ -354,10 +359,10 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 		if(PsychUIInputText.focusOn == null)
 		{
 			ClientPrefs.toggleVolumeKeys(true);
-			if(FlxG.keys.justPressed.SPACE #if mobile || virtualPad.getButton('buttonC').justPressed #end) {
+			if(EditorInput.justPressed(FlxKey.SPACE) #if mobile || virtualPad.getButton('buttonC').justPressed #end) {
 				reloadText(false);
 			}
-			if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end) {
+			if(EditorInput.justPressed(FlxKey.ESCAPE) #if android || EditorInput.backPressed() #end) {
 				if(!unsavedProgress)
 				{
 					MusicBeatState.switchState(new states.editors.MasterEditorMenu());
@@ -369,12 +374,12 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 			}
 			var negaMult:Array<Int> = [1, -1];
 			var controlAnim:Array<Bool> = [
-				#if desktop FlxG.keys.justPressed.W #else virtualPad.getButton('buttonUp').justPressed #end,
-				#if desktop FlxG.keys.justPressed.S #else virtualPad.getButton('buttonDown').justPressed #end
+				EditorInput.justPressed(FlxKey.W),
+				EditorInput.justPressed(FlxKey.S)
 			];
 			var controlText:Array<Bool> = [
-				#if desktop FlxG.keys.justPressed.D #else virtualPad.getButton('buttonLeft').justPressed #end,
-				#if desktop FlxG.keys.justPressed.A #else virtualPad.getButton('buttonRight').justPressed #end
+				EditorInput.justPressed(FlxKey.D),
+				EditorInput.justPressed(FlxKey.A)
 			];
 			for (i in 0...controlAnim.length) {
 				if(controlAnim[i] && character.jsonFile.animations.length > 0) {
@@ -400,7 +405,7 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 				}
 			}
 
-			if(FlxG.keys.justPressed.O #if mobile || virtualPad.getButton('buttonA').justPressed #end) {
+			if(EditorInput.justPressed(FlxKey.O) #if mobile || virtualPad.getButton('buttonA').justPressed #end) {
 				dialogueFile.dialogue.remove(dialogueFile.dialogue[curSelected]);
 				if(dialogueFile.dialogue.length < 1) //You deleted everything, dumbo!
 				{
@@ -409,7 +414,7 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 					];
 				}
 				changeText();
-			} else if(FlxG.keys.justPressed.P #if mobile || virtualPad.getButton('buttonB').justPressed #end) {
+			} else if(EditorInput.justPressed(FlxKey.P) #if mobile || virtualPad.getButton('buttonB').justPressed #end) {
 				dialogueFile.dialogue.insert(curSelected + 1, copyDefaultLine());
 				changeText(1);
 			}
@@ -489,6 +494,12 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 			else if(rate > 48) rate = 48;
 			character.animation.curAnim.frameRate = rate;
 		}
+	}
+
+	override function destroy()
+	{
+		fileDialog.destroy();
+		super.destroy();
 	}
 
 	var fileDialog:FileDialogHandler = new FileDialogHandler();

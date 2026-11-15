@@ -28,6 +28,7 @@ class MainMenuState extends MusicBeatState
 		'story_mode',
 		'freeplay',
 		#if MODS_ALLOWED 'mods', #end
+		'editors',
 		'credits'
 	];
 
@@ -81,16 +82,16 @@ class MainMenuState extends MusicBeatState
 
 		for (num => option in optionShit)
 		{
-			var item:FlxSprite = createMenuItem(option, 0, (num * 140) + 90);
-			item.y += (4 - optionShit.length) * 70; // Offsets for when you have anything other than 4 items
+			var item:FlxSprite = createMenuItem(option, 0, 50 + num * 104);
+			fitItem(item, 520, 86);
 			item.screenCenter(X);
 		}
 
-		if (leftOption != null)
-			leftItem = createMenuItem(leftOption, 60, 490);
+		if (leftOption != null) { leftItem = createMenuItem(leftOption, 60, 590); fitItem(leftItem, 300, 62); }
 		if (rightOption != null)
 		{
-			rightItem = createMenuItem(rightOption, FlxG.width - 60, 490);
+			rightItem = createMenuItem(rightOption, FlxG.width - 60, 590);
+			fitItem(rightItem, 300, 62);
 			rightItem.x -= rightItem.width;
 		}
 
@@ -125,14 +126,16 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollow, null, 0.15);
 
-		#if (mobile && !BETA)
-	    addVirtualPad('NONE', 'C');
-		virtualPad.y -= 215;
-		#end
 	}
 
 	function createMenuItem(name:String, x:Float, y:Float):FlxSprite
 	{
+		if(name == 'editors')
+		{
+			var label = new FlxText(x, y, 520, 'EDITORS', 64);
+			label.setFormat(Paths.font('vcr.ttf'), 64, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			label.borderSize=3; label.scrollFactor.set(); menuItems.add(label); return label;
+		}
 		var menuItem:FlxSprite = new FlxSprite(x, y);
 		menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_$name');
 		menuItem.animation.addByPrefix('idle', '$name idle', 24, true);
@@ -146,6 +149,16 @@ class MainMenuState extends MusicBeatState
 		return menuItem;
 	}
 
+	function fitItem(item:FlxSprite, maxWidth:Float, maxHeight:Float)
+	{
+		var ratio=Math.min(1,Math.min(maxWidth/item.width,maxHeight/item.height));
+		item.scale.scale(ratio);item.updateHitbox();
+	}
+	#if mobile
+	var menuTouch:Int=-1;
+	var touchStartX:Float=0;
+	var touchStartY:Float=0;
+	#end
 	var selectedSomethin:Bool = false;
 
 	var timeNotMoving:Float = 0;
@@ -157,6 +170,27 @@ class MainMenuState extends MusicBeatState
 		if (!selectedSomethin)
 		{
 			var mouseConfirmClick:Bool = false;
+			var touchConfirm:Bool = false;
+			#if mobile
+			if(menuTouch!=-1 && !Lambda.exists(FlxG.touches.list,function(t) return t.touchPointID==menuTouch)) menuTouch=-1;
+			for(touch in FlxG.touches.list)
+			{
+				if(touch.justPressed && menuTouch == -1)
+				{
+					var hit=false;
+					for(i => item in menuItems.members) if(touch.overlaps(item)) { curColumn=CENTER;curSelected=i;hit=true;break; }
+					if(leftItem!=null && touch.overlaps(leftItem)) { curColumn=LEFT;hit=true; }
+					if(rightItem!=null && touch.overlaps(rightItem)) { curColumn=RIGHT;hit=true; }
+					if(hit) { menuTouch=touch.touchPointID;touchStartX=touch.screenX;touchStartY=touch.screenY;changeItem(); }
+				}
+				if(touch.touchPointID==menuTouch && touch.justReleased)
+				{
+					var item=curColumn==CENTER?menuItems.members[curSelected]:curColumn==LEFT?leftItem:rightItem;
+					touchConfirm=touch.overlaps(item) && Math.abs(touch.screenX-touchStartX)<18 && Math.abs(touch.screenY-touchStartY)<18;
+					menuTouch=-1;
+				}
+			}
+			#end
 			if (controls.UI_UP_P)
 				changeItem(-1);
 
@@ -275,7 +309,7 @@ class MainMenuState extends MusicBeatState
 				MusicBeatState.switchState(new TitleState());
 			}
 
-			if (controls.ACCEPT || (FlxG.mouse.justPressed && allowMouse && mouseConfirmClick))
+			if (controls.ACCEPT || touchConfirm || (FlxG.mouse.justPressed && allowMouse && mouseConfirmClick))
 			{
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 				selectedSomethin = true;
@@ -320,6 +354,8 @@ class MainMenuState extends MusicBeatState
 							MusicBeatState.switchState(new AchievementsMenuState());
 						#end
 
+						case 'editors':
+							MusicBeatState.switchState(new MasterEditorMenu());
 						case 'credits':
 							MusicBeatState.switchState(new CreditsState());
 						case 'options':
@@ -351,7 +387,7 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 			#if !BETA
-			if (controls.justPressed('debug_1') #if mobile || virtualPad.getButton('buttonC').justPressed #end)
+			if (controls.justPressed('debug_1'))
 			{
 				selectedSomethin = true;
 				FlxG.mouse.visible = false;
@@ -371,7 +407,7 @@ class MainMenuState extends MusicBeatState
 
 		for (item in menuItems)
 		{
-			item.animation.play('idle');
+			if(Std.isOfType(item, FlxText)) item.color=FlxColor.WHITE; else item.animation.play('idle');
 			item.centerOffsets();
 		}
 
@@ -385,7 +421,7 @@ class MainMenuState extends MusicBeatState
 			case RIGHT:
 				selectedItem = rightItem;
 		}
-		selectedItem.animation.play('selected');
+		if(Std.isOfType(selectedItem, FlxText)) selectedItem.color=FlxColor.YELLOW; else selectedItem.animation.play('selected');
 		selectedItem.centerOffsets();
 		camFollow.y = selectedItem.getGraphicMidpoint().y;
 	}
