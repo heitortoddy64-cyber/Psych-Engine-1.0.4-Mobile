@@ -52,6 +52,13 @@ class PsychUIButton extends FlxSpriteGroup
 	public var forceCheckNext:Bool = false;
 	public var broadcastButtonEvent:Bool = true;
 	var _firstFrame:Bool = true;
+	var touchX:Float = 0;
+	var touchY:Float = 0;
+	function click()
+	{
+		if(onClick != null) onClick();
+		if(broadcastButtonEvent) PsychUIEventHandler.event(CLICK_EVENT, this);
+	}
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
@@ -64,15 +71,17 @@ class PsychUIButton extends FlxSpriteGroup
 			_firstFrame = false;
 		}
 		
-		if(isClicked && FlxG.mouse.released)
+		if(isClicked && EditorPointer.released)
 		{
+			if(EditorPointer.touchActive && EditorPointer.justReleased && EditorPointer.overlaps(bg, camera)
+				&& Math.abs(EditorPointer.screenX-touchX)<18 && Math.abs(EditorPointer.screenY-touchY)<18) click();
 			forceCheckNext = true;
 			isClicked = false;
 		}
 
-		if(forceCheckNext || FlxG.mouse.justMoved || FlxG.mouse.justPressed)
+		if(forceCheckNext || EditorPointer.justMoved || EditorPointer.justPressed)
 		{
-			var overlapped:Bool = (FlxG.mouse.overlaps(bg, camera));
+			var overlapped:Bool = (EditorPointer.overlaps(bg, camera));
 
 			forceCheckNext = false;
 
@@ -84,14 +93,14 @@ class PsychUIButton extends FlxSpriteGroup
 				text.color = style.textColor;
 			}
 
-			if(overlapped && FlxG.mouse.justPressed)
+			if(overlapped && EditorPointer.justPressed)
 			{
+				touchX=EditorPointer.screenX; touchY=EditorPointer.screenY;
 				isClicked = true;
 				bg.color = clickStyle.bgColor;
 				bg.alpha = clickStyle.bgAlpha;
 				text.color = clickStyle.textColor;
-				if(onClick != null) onClick();
-				if(broadcastButtonEvent) PsychUIEventHandler.event(CLICK_EVENT, this);
+				if(!EditorPointer.touchActive) click();
 			}
 		}
 	}

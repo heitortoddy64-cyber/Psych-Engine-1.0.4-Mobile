@@ -1,5 +1,7 @@
 package states.editors;
 
+import flixel.input.keyboard.FlxKey;
+
 import flash.net.FileFilter;
 import haxe.Json;
 
@@ -58,7 +60,7 @@ class MenuCharacterEditorState extends MusicBeatState implements PsychUIEventHan
 		add(tipText);
 
 		addEditorBox();
-		FlxG.mouse.visible = true;
+		EditorPointer.visible = true;
 		updateCharacters();
 
 		#if mobile
@@ -67,6 +69,9 @@ class MenuCharacterEditorState extends MusicBeatState implements PsychUIEventHan
 		#end
 
 		super.create();
+		#if mobile
+		mobile.controls.EditorTouchControls.install(this, "Menu Character");
+		#end
 	}
 
 	var UI_typebox:PsychUIBox;
@@ -214,7 +219,7 @@ class MenuCharacterEditorState extends MusicBeatState implements PsychUIEventHan
 		if(PsychUIInputText.focusOn == null)
 		{
 			ClientPrefs.toggleVolumeKeys(true);
-			if(FlxG.keys.justPressed.ESCAPE #if mobile || virtualPad.getButton('buttonB').justPressed #end) {
+			if(EditorInput.justPressed(FlxKey.ESCAPE) #if mobile || virtualPad.getButton('buttonB').justPressed #end) {
 				if(!unsavedProgress)
 				{
 					MusicBeatState.switchState(new states.editors.MasterEditorMenu());
@@ -224,26 +229,26 @@ class MenuCharacterEditorState extends MusicBeatState implements PsychUIEventHan
 			}
 
 			var shiftMult:Int = 1;
-			if(FlxG.keys.pressed.SHIFT #if mobile || virtualPad.getButton('buttonC').pressed #end) shiftMult = 10;
+			if(EditorInput.pressed(FlxKey.SHIFT) #if mobile || virtualPad.getButton('buttonC').pressed #end) shiftMult = 10;
 
-			if(FlxG.keys.justPressed.LEFT #if mobile || virtualPad.getButton('buttonLeft').justPressed #end) {
+			if(EditorInput.justPressed(FlxKey.LEFT) #if mobile || virtualPad.getButton('buttonLeft').justPressed #end) {
 				characterFile.position[0] += shiftMult;
 				updateOffset();
 			}
-			if(FlxG.keys.justPressed.RIGHT #if mobile || virtualPad.getButton('buttonRight').justPressed #end) {
+			if(EditorInput.justPressed(FlxKey.RIGHT) #if mobile || virtualPad.getButton('buttonRight').justPressed #end) {
 				characterFile.position[0] -= shiftMult;
 				updateOffset();
 			}
-			if(FlxG.keys.justPressed.UP #if mobile || virtualPad.getButton('buttonUp').justPressed #end) {
+			if(EditorInput.justPressed(FlxKey.UP) #if mobile || virtualPad.getButton('buttonUp').justPressed #end) {
 				characterFile.position[1] += shiftMult;
 				updateOffset();
 			}
-			if(FlxG.keys.justPressed.DOWN #if mobile || virtualPad.getButton('buttonDown').justPressed #end) {
+			if(EditorInput.justPressed(FlxKey.DOWN) #if mobile || virtualPad.getButton('buttonDown').justPressed #end) {
 				characterFile.position[1] -= shiftMult;
 				updateOffset();
 			}
 
-			if(FlxG.keys.justPressed.SPACE #if mobile || virtualPad.getButton('buttonA').justPressed #end && characterTypeRadio.checked == 1) {
+			if(EditorInput.justPressed(FlxKey.SPACE) #if mobile || virtualPad.getButton('buttonA').justPressed #end && characterTypeRadio.checked == 1) {
 				grpWeekCharacters.members[characterTypeRadio.checked].animation.play('confirm', true);
 			}
 		}
@@ -261,6 +266,12 @@ class MenuCharacterEditorState extends MusicBeatState implements PsychUIEventHan
 		var char:MenuCharacter = grpWeekCharacters.members[characterTypeRadio.checked];
 		char.offset.set(characterFile.position[0], characterFile.position[1]);
 		txtOffsets.text = '' + characterFile.position;
+	}
+
+	override function destroy()
+	{
+		fileDialog.destroy();
+		super.destroy();
 	}
 
 	var fileDialog:FileDialogHandler = new FileDialogHandler();

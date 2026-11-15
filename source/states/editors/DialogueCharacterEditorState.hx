@@ -1,5 +1,7 @@
 package states.editors;
 
+import flixel.input.keyboard.FlxKey;
+
 import flash.net.FileFilter;
 import haxe.Json;
 import lime.system.Clipboard;
@@ -139,7 +141,7 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 		hudGroup.add(daText);
 
 		addEditorBox();
-		FlxG.mouse.visible = true;
+		EditorPointer.visible = true;
 		updateCharTypeBox();
 		
 		#if mobile
@@ -149,6 +151,9 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 		#end
 
 		super.create();
+		#if mobile
+		mobile.controls.EditorTouchControls.install(this, "Portrait");
+		#end
 	}
 
 	var UI_typebox:PsychUIBox;
@@ -482,7 +487,7 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 		if(PsychUIInputText.focusOn == null)
 		{
 			ClientPrefs.toggleVolumeKeys(true);
-			if(FlxG.keys.justPressed.SPACE #if mobile || virtualPad.getButton('buttonA').justPressed #end && UI_mainbox.selectedName == 'Character') {
+			if(EditorInput.justPressed(FlxKey.SPACE) #if mobile || virtualPad.getButton('buttonA').justPressed #end && UI_mainbox.selectedName == 'Character') {
 				character.playAnim(character.jsonFile.animations[curAnim].anim);
 				daText.resetDialogue();
 				updateTextBox();
@@ -491,100 +496,34 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 			//lots of Ifs lol get trolled
 			var offsetAdd:Int = 1;
 			var speed:Float = 300;
-			if(FlxG.keys.pressed.SHIFT #if mobile || virtualPad.getButton('buttonB').pressed #end) {
+			if(EditorInput.pressed(FlxKey.SHIFT) #if mobile || virtualPad.getButton('buttonB').pressed #end) {
 				speed = 1200;
 				offsetAdd = 10;
 			}
-			#if mobile
-			var negaMult:Array<Int> = [1, -1, -1, 1];
-			#else
 			var negaMult:Array<Int> = [1, 1, -1, -1];
-			#end
-
-			#if mobile
-			if(UI_mainbox.selectedName == 'Character') {
-				var controlArray:Array<Bool> = [
-					virtualPad.getButton('buttonRight').pressed,
-					virtualPad.getButton('buttonUp').pressed,
-					virtualPad.getButton('buttonLeft').pressed,
-					virtualPad.getButton('buttonDown').pressed
-				];
-				for (i in 0...controlArray.length) {
-					if(controlArray[i]) {
-						if(i % 2 == 1) {
-							mainGroup.y += speed * elapsed * negaMult[i];
-						} else {
-							mainGroup.x += speed * elapsed * negaMult[i];
-						}
-					}
-				}
+			var cameraKeys = [FlxKey.J, FlxKey.I, FlxKey.L, FlxKey.K];
+			for(i in 0...cameraKeys.length) if(EditorInput.pressed(cameraKeys[i]))
+			{
+				if(i % 2 == 1) mainGroup.y += speed * elapsed * negaMult[i];
+				else mainGroup.x += speed * elapsed * negaMult[i];
 			}
-			#else
-			var controlArray:Array<Bool> = [FlxG.keys.pressed.J, FlxG.keys.pressed.I, FlxG.keys.pressed.L, FlxG.keys.pressed.K];
-			for (i in 0...controlArray.length) {
-				if(controlArray[i]) {
-					if(i % 2 == 1) {
-						mainGroup.y += speed * elapsed * negaMult[i];
-					} else {
-						mainGroup.x += speed * elapsed * negaMult[i];
-					}
-				}
-			}
-			#end
 
 			if(UI_mainbox.selectedName == 'Animations' && curSelectedAnim != null && character.dialogueAnimations.exists(curSelectedAnim)) {
 				var moved:Bool = false;
 				var animShit:DialogueAnimArray = character.dialogueAnimations.get(curSelectedAnim);
 				var controlArrayLoop:Array<Bool> = [
-					#if desktop FlxG.keys.justPressed.A #else virtualPad.getButton('buttonLeft').justPressed #end,
-					#if desktop FlxG.keys.justPressed.W #else virtualPad.getButton('buttonUp').justPressed #end,
-					#if desktop FlxG.keys.justPressed.D #else virtualPad.getButton('buttonRight').justPressed #end,
-					#if desktop FlxG.keys.justPressed.S #else virtualPad.getButton('buttonDown').justPressed #end
+					EditorInput.justPressed(FlxKey.A),
+					EditorInput.justPressed(FlxKey.W),
+					EditorInput.justPressed(FlxKey.D),
+					EditorInput.justPressed(FlxKey.S)
 				];
 				var controlArrayIdle:Array<Bool> = [
-					#if desktop FlxG.keys.justPressed.LEFT #else virtualPad.getButton('buttonLeft').justPressed #end,
-					#if desktop FlxG.keys.justPressed.UP #else virtualPad.getButton('buttonUp').justPressed #end,
-					#if desktop FlxG.keys.justPressed.RIGHT #else virtualPad.getButton('buttonRight').justPressed #end,
-					#if desktop FlxG.keys.justPressed.DOWN #else virtualPad.getButton('buttonDown').justPressed #end
+					EditorInput.justPressed(FlxKey.LEFT),
+					EditorInput.justPressed(FlxKey.UP),
+					EditorInput.justPressed(FlxKey.RIGHT),
+					EditorInput.justPressed(FlxKey.DOWN)
 				];
-				#if mobile
-				if (virtualPad.getButton('buttonC').pressed)
-				{
-					for (i in 0...controlArrayLoop.length)
-					{
-						if (controlArrayLoop[i])
-						{
-							if (i % 2 == 1)
-							{
-								animShit.loop_offsets[1] += offsetAdd * negaMult[i];
-							}
-							else
-							{
-								animShit.loop_offsets[0] += offsetAdd * negaMult[i];
-							}
-							moved = true;
-						}
-					}
-				}
-				else
-				{
-					for (i in 0...controlArrayIdle.length)
-					{
-						if (controlArrayIdle[i])
-						{
-							if (i % 2 == 1)
-							{
-								animShit.idle_offsets[1] += offsetAdd * negaMult[i];
-							}
-							else
-							{
-								animShit.idle_offsets[0] += offsetAdd * negaMult[i];
-							}
-							moved = true;
-						}
-					}
-				}
-				#else
+
 				for (i in 0...controlArrayLoop.length)
 				{
 					if (controlArrayLoop[i])
@@ -615,7 +554,6 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 						moved = true;
 					}
 				}
-				#end
 
 				if(moved) {
 					offsetLoopText.text = 'Loop: ' + animShit.loop_offsets;
@@ -625,15 +563,15 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 				}
 			}
 
-			if (FlxG.keys.pressed.Q && camGame.zoom > 0.1) {
+			if (EditorInput.pressed(FlxKey.Q) && camGame.zoom > 0.1) {
 				camGame.zoom -= elapsed * camGame.zoom;
 				if(camGame.zoom < 0.1) camGame.zoom = 0.1;
 			}
-			if (FlxG.keys.pressed.E && camGame.zoom < 1) {
+			if (EditorInput.pressed(FlxKey.E) && camGame.zoom < 1) {
 				camGame.zoom += elapsed * camGame.zoom;
 				if(camGame.zoom > 1) camGame.zoom = 1;
 			}
-			if(FlxG.keys.justPressed.H) {
+			if(EditorInput.justPressed(FlxKey.H)) {
 				if(UI_mainbox.selectedName == 'Animations') {
 					currentGhosts++;
 					if(currentGhosts > 2) currentGhosts = 0;
@@ -646,7 +584,7 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 					hudGroup.visible = !hudGroup.visible;
 				}
 			}
-			if(FlxG.keys.justPressed.R) {
+			if(EditorInput.justPressed(FlxKey.R)) {
 				camGame.zoom = 1;
 				mainGroup.setPosition(0, 0);
 				hudGroup.visible = true;
@@ -688,7 +626,7 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 			if(UI_mainbox.selectedName == 'Character')
 			{
 				var negaMult:Array<Int> = [1, -1];
-				var controlAnim:Array<Bool> = [FlxG.keys.justPressed.W, FlxG.keys.justPressed.S];
+				var controlAnim:Array<Bool> = [EditorInput.justPressed(FlxKey.W), EditorInput.justPressed(FlxKey.S)];
 
 				if(controlAnim.contains(true))
 				{
@@ -724,7 +662,7 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 				}
 			}
 
-			if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end) {
+			if(EditorInput.justPressed(FlxKey.ESCAPE) #if android || EditorInput.backPressed() #end) {
 				if(!unsavedProgress)
 				{
 					MusicBeatState.switchState(new states.editors.MasterEditorMenu());
@@ -742,6 +680,12 @@ class DialogueCharacterEditorState extends MusicBeatState implements PsychUIEven
 		else ClientPrefs.toggleVolumeKeys(false);
 	}
 	
+	override function destroy()
+	{
+		fileDialog.destroy();
+		super.destroy();
+	}
+
 	var fileDialog:FileDialogHandler = new FileDialogHandler();
 	function loadCharacter() {
 		#if android

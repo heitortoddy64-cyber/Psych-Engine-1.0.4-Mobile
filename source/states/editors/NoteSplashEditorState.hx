@@ -1,12 +1,13 @@
 package states.editors;
 
+import flixel.input.keyboard.FlxKey;
+
 import objects.Note;
 import objects.NoteSplash;
 import objects.StrumNote;
 
 import openfl.net.FileFilter;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
-import flixel.input.keyboard.FlxKey;
 import haxe.Json;
 
 #if mobile
@@ -19,6 +20,8 @@ class NoteSplashEditorState extends MusicBeatState
     var strums:FlxTypedSpriteGroup<StrumNote> = new FlxTypedSpriteGroup();
     var splashes:FlxTypedSpriteGroup<NoteSplash> = new FlxTypedSpriteGroup();
     var config = NoteSplash.createConfig();
+    var importedConfig:NoteSplashConfig;
+    public function new(?loaded:NoteSplashConfig) { super(); importedConfig=loaded; }
 
     var tipText:FlxText;
     var errorText:FlxText;
@@ -36,7 +39,7 @@ class NoteSplashEditorState extends MusicBeatState
         if (imageSkin == null)
             imageSkin =  NoteSplash.defaultNoteSplash + NoteSplash.getSplashSkinPostfix();
 
-        FlxG.mouse.visible = true;
+        EditorPointer.visible = true;
 
         FlxG.sound.volumeUpKeys = [];
         FlxG.sound.volumeDownKeys = [];
@@ -102,6 +105,7 @@ class NoteSplashEditorState extends MusicBeatState
         if (splash.config != null)
             config = splash.config;
 
+        if(importedConfig!=null) {config=importedConfig;importedConfig=null;splash.config=config;}
         parseRGB();
 
         addPropertiesTab();
@@ -127,6 +131,9 @@ class NoteSplashEditorState extends MusicBeatState
         #end
 
         super.create();
+		#if mobile
+		mobile.controls.EditorTouchControls.install(this, "Splash");
+		#end
     }
 
     var animDropDown:PsychUIDropDownMenu;
@@ -353,6 +360,23 @@ class NoteSplashEditorState extends MusicBeatState
 
         var saveButton:PsychUIButton = new PsychUIButton(20, 130, "Save", saveSplash);
         ui.add(saveButton);
+        ui.add(new PsychUIButton(110,130,"Open JSON",function()
+        {
+            if(FileDialogHandler.isBusy) return;
+            fileDialog.open(null,null,null,function()
+            {
+                try
+                {
+                    var parsed:Dynamic=Json.parse(fileDialog.data);
+                    if(parsed.animations==null || parsed.scale==null) throw 'Invalid note splash JSON';
+                    var loaded=NoteSplash.createConfig();
+                    loaded.scale=parsed.scale;loaded.allowRGB=parsed.allowRGB;loaded.allowPixel=parsed.allowPixel;loaded.rgb=parsed.rgb;
+                    for(name in Reflect.fields(parsed.animations)) loaded.animations.set(name,Reflect.field(parsed.animations,name));
+                    MusicBeatState.switchState(new NoteSplashEditorState(loaded));
+                }
+                catch(e:Dynamic) FlxG.log.error('Splash import failed: '+Std.string(e));
+            },null,onLoadError);
+        }));
 
         templateButton = new PsychUIButton(20, 155, "Template");
         ui.add(templateButton);
@@ -544,20 +568,20 @@ class NoteSplashEditorState extends MusicBeatState
             }
 
             var changedOffset = false;
-            if (FlxG.keys.pressed.CONTROL #if mobile || virtualPad.isPressed(TouchInputID.C) #end  && config.animations.get(curAnim) != null)
+            if (EditorInput.pressed(FlxKey.CONTROL) #if mobile || virtualPad.isPressed(TouchInputID.C) #end  && config.animations.get(curAnim) != null)
             {
-                if (FlxG.keys.justPressed.C #if mobile || virtualPad.isJustPressed(TouchInputID.D) #end)
+                if (EditorInput.justPressed(FlxKey.C) #if mobile || virtualPad.isJustPressed(TouchInputID.D) #end)
                 {
                     copiedOffset = config.animations.get(curAnim).offsets.copy();
                 }
-                else if (FlxG.keys.justPressed.V #if mobile || virtualPad.isJustPressed(TouchInputID.B) #end)
+                else if (EditorInput.justPressed(FlxKey.V) #if mobile || virtualPad.isJustPressed(TouchInputID.B) #end)
                 {
                     var conf = config.animations.get(curAnim);
                     conf.offsets = copiedOffset.copy(); 
                     config.animations.set(curAnim, conf);
                     changedOffset = true;
                 }
-                else if(FlxG.keys.justPressed.R #if mobile || virtualPad.isJustPressed(TouchInputID.A) #end)
+                else if(EditorInput.justPressed(FlxKey.R) #if mobile || virtualPad.isJustPressed(TouchInputID.A) #end)
                 {
                     var conf = config.animations.get(curAnim);
                     conf.offsets = [0, 0];
@@ -566,9 +590,9 @@ class NoteSplashEditorState extends MusicBeatState
                 }
             }
 
-            var multiplier:Int = (FlxG.keys.pressed.SHIFT #if mobile || virtualPad.isPressed(TouchInputID.X) #end || FlxG.gamepads.anyPressed(LEFT_SHOULDER)) ? 10 : 1;
+            var multiplier:Int = (EditorInput.pressed(FlxKey.SHIFT) #if mobile || virtualPad.isPressed(TouchInputID.X) #end || FlxG.gamepads.anyPressed(LEFT_SHOULDER)) ? 10 : 1;
 
-            var moveKeysP = [#if desktop FlxG.keys.justPressed.LEFT #else virtualPad.isJustPressed(TouchInputID.LEFT) #end, #if desktop FlxG.keys.justPressed.RIGHT #else virtualPad.isJustPressed(TouchInputID.RIGHT) #end, #if desktop FlxG.keys.justPressed.UP #else virtualPad.isJustPressed(TouchInputID.UP) #end, #if desktop FlxG.keys.justPressed.DOWN #else virtualPad.isJustPressed(TouchInputID.DOWN) #end];
+            var moveKeysP = [EditorInput.justPressed(FlxKey.LEFT), EditorInput.justPressed(FlxKey.RIGHT), EditorInput.justPressed(FlxKey.UP), EditorInput.justPressed(FlxKey.DOWN)];
             if(moveKeysP.contains(true))
             {
                 config.animations[curAnim].offsets[0] += ((moveKeysP[0] ? 1 : 0) - (moveKeysP[1] ? 1 : 0)) * multiplier;
@@ -576,7 +600,7 @@ class NoteSplashEditorState extends MusicBeatState
                 changedOffset = true;
             }
     
-            var moveKeys = [#if desktop FlxG.keys.pressed.LEFT #else virtualPad.isPressed(TouchInputID.LEFT2) #end, #if desktop FlxG.keys.pressed.RIGHT #else virtualPad.isPressed(TouchInputID.RIGHT2) #end, #if desktop FlxG.keys.pressed.UP #else virtualPad.isPressed(TouchInputID.UP2) #end, #if desktop FlxG.keys.pressed.DOWN #else virtualPad.isPressed(TouchInputID.DOWN2) #end];
+            var moveKeys = [EditorInput.pressed(FlxKey.LEFT), EditorInput.pressed(FlxKey.RIGHT), EditorInput.pressed(FlxKey.UP), EditorInput.pressed(FlxKey.DOWN)];
             if(moveKeys.contains(true))
             {
                 holdingArrowsTime += elapsed;
@@ -598,24 +622,24 @@ class NoteSplashEditorState extends MusicBeatState
                 holdingArrowsElapsed = 0;
             }
 
-            if(changedOffset || FlxG.keys.justPressed.SPACE #if mobile || virtualPad.isJustPressed(TouchInputID.V) #end) splash();
+            if(changedOffset || EditorInput.justPressed(FlxKey.SPACE) #if mobile || virtualPad.isJustPressed(TouchInputID.V) #end) splash();
         }
 
         if (!blockInput)
         {
-            if (#if desktop controls.BACK #else FlxG.android.justReleased.BACK #end)
+            if (controls.BACK || EditorInput.justPressed(FlxKey.ESCAPE))
                 MusicBeatState.switchState(new MasterEditorMenu());
-            if (FlxG.keys.justPressed.F1 #if mobile || virtualPad.isJustPressed(TouchInputID.Y) #end)
+            if (EditorInput.justPressed(FlxKey.F1) #if mobile || virtualPad.isJustPressed(TouchInputID.Y) #end)
                 openSubState(new NoteSplashEditorHelpSubState());
         }
 
-        if (FlxG.mouse.overlaps(strums))
+        if (EditorPointer.overlaps(strums))
         {
             strums.forEach(function(strum:StrumNote)
             {
-                if (FlxG.mouse.overlaps(strum))
+                if (EditorPointer.overlaps(strum))
                 {
-                    if (!FlxG.mouse.justPressed)
+                    if (!EditorPointer.justPressed)
                     {
                         if (strum.animation.curAnim.name != 'pressed' && strum.animation.curAnim.name != 'confirm')
                             strum.playAnim('pressed');
@@ -848,6 +872,7 @@ class NoteSplashEditorState extends MusicBeatState
     override function destroy()
     {
         NoteSplash.configs.clear();
+        fileDialog.destroy();
         super.destroy();
 
         FlxG.sound.music.volume = 1;
@@ -974,7 +999,7 @@ class NoteSplashEditorHelpSubState extends MusicBeatSubstate
     {
         super.update(elapsed);
 
-        if (controls.BACK #if android || FlxG.android.justReleased.BACK #end || FlxG.keys.justPressed.F1)
+        if (controls.BACK || EditorInput.justPressed(FlxKey.ESCAPE) #if android || EditorInput.backPressed() #end || EditorInput.justPressed(FlxKey.F1))
             close();
     }
 }

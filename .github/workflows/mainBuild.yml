@@ -9,6 +9,7 @@ env:
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  workflow_call:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -36,6 +37,7 @@ jobs:
         run: |
           python3 tests/discord_platforms.py
           python3 tests/optimization_v1.py
+          python3 tests/lite_v2.py
 
       - name: Configure Android
         run: |
@@ -63,6 +65,7 @@ jobs:
           if-no-files-found: error
 
   ios:
+    if: github.event_name == 'workflow_dispatch'
     name: Build iOS
     runs-on: macos-15
     steps:
@@ -104,6 +107,7 @@ jobs:
           if-no-files-found: error
           
   linux:
+    if: github.event_name == 'workflow_dispatch'
     name: Build Linux
     runs-on: ubuntu-latest
 
@@ -136,6 +140,7 @@ jobs:
           name: PsychEngine-Linux
           path: 'export/release/linux/bin'
   windows:
+    if: github.event_name == 'workflow_dispatch'
     name: Build Windows
     runs-on: windows-latest
 
@@ -165,6 +170,7 @@ jobs:
           name: PsychEngine-Windows
           path: export/release/windows/bin
   mac:
+    if: github.event_name == 'workflow_dispatch'
     name: Build MacOS
     runs-on: macos-15
 

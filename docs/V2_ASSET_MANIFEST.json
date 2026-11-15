@@ -1,0 +1,3467 @@
+{
+  "base_commit": "8947d619c2f803506af6401b3f0c40f6dcd3558b",
+  "source_assets_before": {
+    "files": 1089,
+    "bytes": 565566450
+  },
+  "removed": [
+    {
+      "path": "assets/base_game/shared/characters/bf-car.json",
+      "bytes": 2527,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/bf-christmas.json",
+      "bytes": 1747,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/bf-holding-gf-dead.json",
+      "bytes": 740,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/bf-holding-gf.json",
+      "bytes": 1778,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/bf-pixel-dead.json",
+      "bytes": 721,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/bf-pixel-opponent.json",
+      "bytes": 1567,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/bf-pixel.json",
+      "bytes": 1563,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/darnell-blazin.json",
+      "bytes": 3051,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/darnell.json",
+      "bytes": 2205,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/gf-car.json",
+      "bytes": 993,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/gf-christmas.json",
+      "bytes": 1077,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/gf-pixel.json",
+      "bytes": 937,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/gf-tankmen.json",
+      "bytes": 1066,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/mom-car.json",
+      "bytes": 1892,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/mom.json",
+      "bytes": 988,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/monster-christmas.json",
+      "bytes": 1905,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/monster.json",
+      "bytes": 1904,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/nene.json",
+      "bytes": 1609,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/parents-christmas.json",
+      "bytes": 3427,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/pico-blazin.json",
+      "bytes": 4897,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/pico-dead.json",
+      "bytes": 812,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/pico-explosion-dead.json",
+      "bytes": 1599,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/pico-playable.json",
+      "bytes": 2416,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/pico-speaker.json",
+      "bytes": 1554,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/pico.json",
+      "bytes": 1636,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/senpai-angry.json",
+      "bytes": 1039,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/senpai.json",
+      "bytes": 1009,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/spirit.json",
+      "bytes": 992,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/spooky.json",
+      "bytes": 1497,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/tankman-playable.json",
+      "bytes": 1976,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/characters/tankman.json",
+      "bytes": 1974,
+      "category": "removed-week character definitions"
+    },
+    {
+      "path": "assets/base_game/shared/data/2hot/2hot-easy.json",
+      "bytes": 34276,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/2hot/2hot-hard.json",
+      "bytes": 41341,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/2hot/2hot.json",
+      "bytes": 37148,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/2hot/notetypes.txt",
+      "bytes": 90,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/2hot/preload.json",
+      "bytes": 248,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/blammed/blammed-easy.json",
+      "bytes": 16997,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/blammed/blammed-hard.json",
+      "bytes": 26647,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/blammed/blammed.json",
+      "bytes": 20188,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/blammed/events.json",
+      "bytes": 10120,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/blazin/blazin-easy.json",
+      "bytes": 30302,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/blazin/blazin-hard.json",
+      "bytes": 31173,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/blazin/blazin.json",
+      "bytes": 30479,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/blazin/notetypes.txt",
+      "bytes": 453,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/bopeebo/bopeebo-easy.json",
+      "bytes": 9152,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/bopeebo/bopeebo-hard.json",
+      "bytes": 8740,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/bopeebo/bopeebo.json",
+      "bytes": 9516,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/bopeebo/events.json",
+      "bytes": 1376,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/cocoa/cocoa-easy.json",
+      "bytes": 15456,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/cocoa/cocoa-hard.json",
+      "bytes": 24979,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/cocoa/cocoa.json",
+      "bytes": 18876,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/cocoa/events.json",
+      "bytes": 475,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/dad-battle/dad-battle-easy.json",
+      "bytes": 16535,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/dad-battle/dad-battle-hard.json",
+      "bytes": 21485,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/dad-battle/dad-battle.json",
+      "bytes": 19184,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/dad-battle/events.json",
+      "bytes": 2408,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/darnell/darnell-easy.json",
+      "bytes": 22922,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/darnell/darnell-hard.json",
+      "bytes": 27351,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/darnell/darnell.json",
+      "bytes": 24139,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/eggnog/eggnog-easy.json",
+      "bytes": 20347,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/eggnog/eggnog-hard.json",
+      "bytes": 27126,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/eggnog/eggnog.json",
+      "bytes": 23364,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/eggnog/events.json",
+      "bytes": 2007,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/fresh/events.json",
+      "bytes": 425,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/fresh/fresh-easy.json",
+      "bytes": 12895,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/fresh/fresh-hard.json",
+      "bytes": 15861,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/fresh/fresh.json",
+      "bytes": 14695,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/guns/guns-easy.json",
+      "bytes": 32978,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/guns/guns-hard.json",
+      "bytes": 55947,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/guns/guns.json",
+      "bytes": 47550,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/high/events.json",
+      "bytes": 605,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/high/high-easy.json",
+      "bytes": 19062,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/high/high-hard.json",
+      "bytes": 27473,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/high/high.json",
+      "bytes": 22431,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/lit-up/lit-up-easy.json",
+      "bytes": 27214,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/lit-up/lit-up-hard.json",
+      "bytes": 32258,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/lit-up/lit-up.json",
+      "bytes": 29994,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/milf/events.json",
+      "bytes": 2641,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/milf/milf-easy.json",
+      "bytes": 29078,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/milf/milf-hard.json",
+      "bytes": 41528,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/milf/milf.json",
+      "bytes": 33648,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/monster/monster-easy.json",
+      "bytes": 25651,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/monster/monster-hard.json",
+      "bytes": 30438,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/monster/monster.json",
+      "bytes": 28596,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/philly-nice/events.json",
+      "bytes": 799,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/philly-nice/philly-nice-easy.json",
+      "bytes": 16102,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/philly-nice/philly-nice-hard.json",
+      "bytes": 28453,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/philly-nice/philly-nice.json",
+      "bytes": 21706,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/pico/pico-easy.json",
+      "bytes": 12667,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/pico/pico-hard.json",
+      "bytes": 20025,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/pico/pico.json",
+      "bytes": 16519,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/roses/events.json",
+      "bytes": 163,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/roses/roses-easy.json",
+      "bytes": 14965,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/roses/roses-hard.json",
+      "bytes": 25408,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/roses/roses.json",
+      "bytes": 20277,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/roses/rosesDialogue.txt",
+      "bytes": 153,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/roses/rosesDialogue_pt-BR.txt",
+      "bytes": 161,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/satin-panties/events.json",
+      "bytes": 268,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/satin-panties/satin-panties-easy.json",
+      "bytes": 19859,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/satin-panties/satin-panties-hard.json",
+      "bytes": 30335,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/satin-panties/satin-panties.json",
+      "bytes": 24987,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/senpai/senpai-easy.json",
+      "bytes": 19686,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/senpai/senpai-hard.json",
+      "bytes": 24468,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/senpai/senpai.json",
+      "bytes": 22368,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/senpai/senpaiDialogue.txt",
+      "bytes": 162,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/senpai/senpaiDialogue_pt-BR.txt",
+      "bytes": 160,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/south/south-easy.json",
+      "bytes": 18051,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/south/south-hard.json",
+      "bytes": 22748,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/south/south.json",
+      "bytes": 22553,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/spookeez/spookeez-easy.json",
+      "bytes": 19674,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/spookeez/spookeez-hard.json",
+      "bytes": 24735,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/spookeez/spookeez.json",
+      "bytes": 22861,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/stress/events.json",
+      "bytes": 502,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/stress/picospeaker.json",
+      "bytes": 18234,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/stress/preload.json",
+      "bytes": 31,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/stress/stress-easy.json",
+      "bytes": 33357,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/stress/stress-hard.json",
+      "bytes": 53581,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/stress/stress.json",
+      "bytes": 45830,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/thorns/events.json",
+      "bytes": 5082,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/thorns/thorns-easy.json",
+      "bytes": 21740,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/thorns/thorns-hard.json",
+      "bytes": 35313,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/thorns/thorns.json",
+      "bytes": 27842,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/thorns/thornsDialogue.txt",
+      "bytes": 305,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/thorns/thornsDialogue_pt-BR.txt",
+      "bytes": 344,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/ugh/events.json",
+      "bytes": 1116,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/ugh/ugh-easy.json",
+      "bytes": 19226,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/ugh/ugh-hard.json",
+      "bytes": 30496,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/ugh/ugh.json",
+      "bytes": 27380,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/winter-horrorland/events.json",
+      "bytes": 672,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/winter-horrorland/winter-horrorland-easy.json",
+      "bytes": 24208,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/winter-horrorland/winter-horrorland-hard.json",
+      "bytes": 31366,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/data/winter-horrorland/winter-horrorland.json",
+      "bytes": 26736,
+      "category": "bundled charts and events"
+    },
+    {
+      "path": "assets/base_game/shared/images/achievements/roadkill_enthusiast.png",
+      "bytes": 5996,
+      "category": "removed-week achievements"
+    },
+    {
+      "path": "assets/base_game/shared/images/achievements/week1_nomiss.png",
+      "bytes": 20155,
+      "category": "removed-week achievements"
+    },
+    {
+      "path": "assets/base_game/shared/images/achievements/week2_nomiss.png",
+      "bytes": 9304,
+      "category": "removed-week achievements"
+    },
+    {
+      "path": "assets/base_game/shared/images/achievements/week3_nomiss.png",
+      "bytes": 21984,
+      "category": "removed-week achievements"
+    },
+    {
+      "path": "assets/base_game/shared/images/achievements/week4_nomiss.png",
+      "bytes": 13430,
+      "category": "removed-week achievements"
+    },
+    {
+      "path": "assets/base_game/shared/images/achievements/week5_nomiss.png",
+      "bytes": 21894,
+      "category": "removed-week achievements"
+    },
+    {
+      "path": "assets/base_game/shared/images/achievements/week6_nomiss-pixel.png",
+      "bytes": 552,
+      "category": "removed-week achievements"
+    },
+    {
+      "path": "assets/base_game/shared/images/achievements/week7_nomiss.png",
+      "bytes": 7249,
+      "category": "removed-week achievements"
+    },
+    {
+      "path": "assets/base_game/shared/images/achievements/weekend1_nomiss.png",
+      "bytes": 14360,
+      "category": "removed-week achievements"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/Mom_Assets.png",
+      "bytes": 1084995,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/Mom_Assets.xml",
+      "bytes": 8667,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/Monster_Assets.png",
+      "bytes": 1301060,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/Monster_Assets.xml",
+      "bytes": 14911,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/Nene.png",
+      "bytes": 977467,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/Nene.xml",
+      "bytes": 17498,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/Pico_Death.png",
+      "bytes": 4680448,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/Pico_Death.xml",
+      "bytes": 9892,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/Pico_FNF_assetss.png",
+      "bytes": 1021295,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/Pico_FNF_assetss.xml",
+      "bytes": 24093,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/bfAndGF.png",
+      "bytes": 2364346,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/bfAndGF.xml",
+      "bytes": 43566,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/bfCar.png",
+      "bytes": 1058619,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/bfCar.xml",
+      "bytes": 38250,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/bfChristmas.png",
+      "bytes": 469758,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/bfChristmas.xml",
+      "bytes": 41586,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/bfHoldingGF-DEAD.png",
+      "bytes": 2217171,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/bfHoldingGF-DEAD.xml",
+      "bytes": 16014,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/bfPixel.png",
+      "bytes": 12234,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/bfPixel.xml",
+      "bytes": 11162,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/bfPixelsDEAD.png",
+      "bytes": 71710,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/bfPixelsDEAD.xml",
+      "bytes": 10143,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/darnell.png",
+      "bytes": 3079662,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/darnell.xml",
+      "bytes": 28116,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/darnellBlazin/Animation.json",
+      "bytes": 146044,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/darnellBlazin/spritemap1.json",
+      "bytes": 7111,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/darnellBlazin/spritemap1.png",
+      "bytes": 1024750,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/gfCar.png",
+      "bytes": 1173632,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/gfCar.xml",
+      "bytes": 5000,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/gfChristmas.png",
+      "bytes": 8223557,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/gfChristmas.xml",
+      "bytes": 8151,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/gfPixel.png",
+      "bytes": 8824,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/gfPixel.xml",
+      "bytes": 2414,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/gfTankmen.png",
+      "bytes": 1898653,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/gfTankmen.xml",
+      "bytes": 7570,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/momCar.png",
+      "bytes": 2005409,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/momCar.xml",
+      "bytes": 8902,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/mom_dad_christmas_assets.png",
+      "bytes": 4993854,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/mom_dad_christmas_assets.xml",
+      "bytes": 19356,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/monsterChristmas.png",
+      "bytes": 801037,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/monsterChristmas.xml",
+      "bytes": 14973,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/picoAnims/Pico_Intro.png",
+      "bytes": 1843557,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/picoAnims/Pico_Intro.xml",
+      "bytes": 31051,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/picoAnims/Pico_Shooting.png",
+      "bytes": 745654,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/picoAnims/Pico_Shooting.xml",
+      "bytes": 5576,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/picoBlazin/Animation.json",
+      "bytes": 464722,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/picoBlazin/spritemap1.json",
+      "bytes": 10504,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/picoBlazin/spritemap1.png",
+      "bytes": 1381498,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/picoExplosionDeath/Animation.json",
+      "bytes": 699364,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/picoExplosionDeath/spritemap1.json",
+      "bytes": 12699,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/picoExplosionDeath/spritemap1.png",
+      "bytes": 2119886,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/picoSpeaker.png",
+      "bytes": 3328241,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/picoSpeaker.xml",
+      "bytes": 27650,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/senpai.png",
+      "bytes": 31515,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/senpai.xml",
+      "bytes": 14911,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/spirit.png",
+      "bytes": 90995,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/spirit.txt",
+      "bytes": 2872,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/spooky_kids_assets.png",
+      "bytes": 287740,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/spooky_kids_assets.xml",
+      "bytes": 15597,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/tankmanCaptain.png",
+      "bytes": 1418716,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/characters/tankmanCaptain.xml",
+      "bytes": 34418,
+      "category": "removed-week character media"
+    },
+    {
+      "path": "assets/base_game/shared/images/menubackgrounds/menu_christmas.png",
+      "bytes": 16696,
+      "category": "removed-week menu backgrounds"
+    },
+    {
+      "path": "assets/base_game/shared/images/menubackgrounds/menu_halloween.png",
+      "bytes": 7474,
+      "category": "removed-week menu backgrounds"
+    },
+    {
+      "path": "assets/base_game/shared/images/menubackgrounds/menu_limo.png",
+      "bytes": 6842,
+      "category": "removed-week menu backgrounds"
+    },
+    {
+      "path": "assets/base_game/shared/images/menubackgrounds/menu_philly.png",
+      "bytes": 19689,
+      "category": "removed-week menu backgrounds"
+    },
+    {
+      "path": "assets/base_game/shared/images/menubackgrounds/menu_phillystreets.png",
+      "bytes": 231975,
+      "category": "removed-week menu backgrounds"
+    },
+    {
+      "path": "assets/base_game/shared/images/menubackgrounds/menu_school.png",
+      "bytes": 1963,
+      "category": "removed-week menu backgrounds"
+    },
+    {
+      "path": "assets/base_game/shared/images/menubackgrounds/menu_tank.png",
+      "bytes": 21289,
+      "category": "removed-week menu backgrounds"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/Menu_Mom.png",
+      "bytes": 152414,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/Menu_Mom.xml",
+      "bytes": 2113,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/Menu_Parents.png",
+      "bytes": 335745,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/Menu_Parents.xml",
+      "bytes": 2188,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/Menu_Pico.png",
+      "bytes": 109825,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/Menu_Pico.xml",
+      "bytes": 2142,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/Menu_Senpai.png",
+      "bytes": 64463,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/Menu_Senpai.xml",
+      "bytes": 1348,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/Menu_Spooky_Kids.png",
+      "bytes": 80071,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/Menu_Spooky_Kids.xml",
+      "bytes": 2543,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/Menu_Tankman.png",
+      "bytes": 117065,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/Menu_Tankman.xml",
+      "bytes": 2164,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/darnell.json",
+      "bytes": 148,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/darnell.png",
+      "bytes": 111575,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/darnell.xml",
+      "bytes": 2244,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/mom.json",
+      "bytes": 117,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/nene.json",
+      "bytes": 152,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/nene.png",
+      "bytes": 862899,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/nene.xml",
+      "bytes": 4261,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/parents-christmas.json",
+      "bytes": 127,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/pico-player.json",
+      "bytes": 152,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/pico-player.png",
+      "bytes": 374397,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/pico-player.xml",
+      "bytes": 5813,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/pico.json",
+      "bytes": 121,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/senpai.json",
+      "bytes": 125,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/spooky.json",
+      "bytes": 134,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/menucharacters/tankman.json",
+      "bytes": 126,
+      "category": "removed-week menu characters"
+    },
+    {
+      "path": "assets/base_game/shared/images/storymenu/week1.png",
+      "bytes": 6261,
+      "category": "story menu artwork"
+    },
+    {
+      "path": "assets/base_game/shared/images/storymenu/week2.png",
+      "bytes": 6517,
+      "category": "story menu artwork"
+    },
+    {
+      "path": "assets/base_game/shared/images/storymenu/week3.png",
+      "bytes": 7148,
+      "category": "story menu artwork"
+    },
+    {
+      "path": "assets/base_game/shared/images/storymenu/week4.png",
+      "bytes": 6262,
+      "category": "story menu artwork"
+    },
+    {
+      "path": "assets/base_game/shared/images/storymenu/week5.png",
+      "bytes": 6440,
+      "category": "story menu artwork"
+    },
+    {
+      "path": "assets/base_game/shared/images/storymenu/week6.png",
+      "bytes": 8979,
+      "category": "story menu artwork"
+    },
+    {
+      "path": "assets/base_game/shared/images/storymenu/week7.png",
+      "bytes": 7349,
+      "category": "story menu artwork"
+    },
+    {
+      "path": "assets/base_game/shared/images/storymenu/weekend1.png",
+      "bytes": 58118,
+      "category": "story menu artwork"
+    },
+    {
+      "path": "assets/base_game/shared/stages/limo.json",
+      "bytes": 555,
+      "category": "removed-week stage definitions"
+    },
+    {
+      "path": "assets/base_game/shared/stages/mall.json",
+      "bytes": 645,
+      "category": "removed-week stage definitions"
+    },
+    {
+      "path": "assets/base_game/shared/stages/mallEvil.json",
+      "bytes": 502,
+      "category": "removed-week stage definitions"
+    },
+    {
+      "path": "assets/base_game/shared/stages/philly.json",
+      "bytes": 542,
+      "category": "removed-week stage definitions"
+    },
+    {
+      "path": "assets/base_game/shared/stages/phillyBlazin.json",
+      "bytes": 618,
+      "category": "removed-week stage definitions"
+    },
+    {
+      "path": "assets/base_game/shared/stages/phillyStreets.json",
+      "bytes": 1068,
+      "category": "removed-week stage definitions"
+    },
+    {
+      "path": "assets/base_game/shared/stages/school.json",
+      "bytes": 604,
+      "category": "removed-week stage definitions"
+    },
+    {
+      "path": "assets/base_game/shared/stages/schoolEvil.json",
+      "bytes": 505,
+      "category": "removed-week stage definitions"
+    },
+    {
+      "path": "assets/base_game/shared/stages/spooky.json",
+      "bytes": 431,
+      "category": "removed-week stage definitions"
+    },
+    {
+      "path": "assets/base_game/shared/stages/tank.json",
+      "bytes": 634,
+      "category": "removed-week stage definitions"
+    },
+    {
+      "path": "assets/base_game/shared/weeks/week1.json",
+      "bytes": 369,
+      "category": "week metadata"
+    },
+    {
+      "path": "assets/base_game/shared/weeks/week2.json",
+      "bytes": 371,
+      "category": "week metadata"
+    },
+    {
+      "path": "assets/base_game/shared/weeks/week3.json",
+      "bytes": 356,
+      "category": "week metadata"
+    },
+    {
+      "path": "assets/base_game/shared/weeks/week4.json",
+      "bytes": 369,
+      "category": "week metadata"
+    },
+    {
+      "path": "assets/base_game/shared/weeks/week5.json",
+      "bytes": 397,
+      "category": "week metadata"
+    },
+    {
+      "path": "assets/base_game/shared/weeks/week6.json",
+      "bytes": 408,
+      "category": "week metadata"
+    },
+    {
+      "path": "assets/base_game/shared/weeks/week7.json",
+      "bytes": 491,
+      "category": "week metadata"
+    },
+    {
+      "path": "assets/base_game/shared/weeks/weekend1.json",
+      "bytes": 463,
+      "category": "week metadata"
+    },
+    {
+      "path": "assets/base_game/songs/2hot/Inst.ogg",
+      "bytes": 1576574,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/2hot/Voices-Opponent.ogg",
+      "bytes": 1373659,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/2hot/Voices-Player.ogg",
+      "bytes": 1342595,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/blammed/Inst.mp3",
+      "bytes": 4281003,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/blammed/Inst.ogg",
+      "bytes": 6060705,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/blammed/Voices-Opponent.mp3",
+      "bytes": 4281003,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/blammed/Voices-Opponent.ogg",
+      "bytes": 4099393,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/blammed/Voices-Player.mp3",
+      "bytes": 4281003,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/blammed/Voices-Player.ogg",
+      "bytes": 3770588,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/blazin/Inst.ogg",
+      "bytes": 1452291,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/bopeebo/Inst.mp3",
+      "bytes": 1959854,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/bopeebo/Inst.ogg",
+      "bytes": 939552,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/bopeebo/Voices-Opponent.mp3",
+      "bytes": 1959854,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/bopeebo/Voices-Opponent.ogg",
+      "bytes": 705962,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/bopeebo/Voices-Player.mp3",
+      "bytes": 1959854,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/bopeebo/Voices-Player.ogg",
+      "bytes": 714105,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/cocoa/Inst.mp3",
+      "bytes": 2709046,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/cocoa/Inst.ogg",
+      "bytes": 1337232,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/cocoa/Voices-Opponent.mp3",
+      "bytes": 2709046,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/cocoa/Voices-Opponent.ogg",
+      "bytes": 1793911,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/cocoa/Voices-Player.mp3",
+      "bytes": 2709046,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/cocoa/Voices-Player.ogg",
+      "bytes": 1162421,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/dad-battle/Inst.mp3",
+      "bytes": 2081480,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/dad-battle/Inst.ogg",
+      "bytes": 958256,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/dad-battle/Voices-Opponent.mp3",
+      "bytes": 2081480,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/dad-battle/Voices-Opponent.ogg",
+      "bytes": 792368,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/dad-battle/Voices-Player.mp3",
+      "bytes": 2081480,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/dad-battle/Voices-Player.ogg",
+      "bytes": 804566,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/darnell/Inst.ogg",
+      "bytes": 1574956,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/darnell/Voices-Opponent.ogg",
+      "bytes": 1368459,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/darnell/Voices-Player.ogg",
+      "bytes": 1228304,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/eggnog/Inst.mp3",
+      "bytes": 2286489,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/eggnog/Inst.ogg",
+      "bytes": 1108836,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/eggnog/Voices-Opponent.mp3",
+      "bytes": 2286489,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/eggnog/Voices-Opponent.ogg",
+      "bytes": 1456597,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/eggnog/Voices-Player.mp3",
+      "bytes": 2286489,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/eggnog/Voices-Player.ogg",
+      "bytes": 941224,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/fresh/Inst.mp3",
+      "bytes": 1970512,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/fresh/Inst.ogg",
+      "bytes": 1242140,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/fresh/Voices-Opponent.mp3",
+      "bytes": 1969885,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/fresh/Voices-Opponent.ogg",
+      "bytes": 658189,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/fresh/Voices-Player.mp3",
+      "bytes": 1969885,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/fresh/Voices-Player.ogg",
+      "bytes": 667382,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/guns/Inst.mp3",
+      "bytes": 3372974,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/guns/Inst.ogg",
+      "bytes": 1651576,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/guns/Voices-Opponent.mp3",
+      "bytes": 3372974,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/guns/Voices-Opponent.ogg",
+      "bytes": 655662,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/guns/Voices-Player.mp3",
+      "bytes": 3372974,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/guns/Voices-Player.ogg",
+      "bytes": 728599,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/high/Inst.mp3",
+      "bytes": 4228758,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/high/Inst.ogg",
+      "bytes": 5967085,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/high/Voices-Opponent.mp3",
+      "bytes": 4228758,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/high/Voices-Opponent.ogg",
+      "bytes": 5057481,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/high/Voices-Player.mp3",
+      "bytes": 4228758,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/high/Voices-Player.ogg",
+      "bytes": 4210717,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/lit-up/Inst.ogg",
+      "bytes": 1387493,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/lit-up/Voices-Opponent.ogg",
+      "bytes": 1351084,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/lit-up/Voices-Player.ogg",
+      "bytes": 1331894,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/milf/Inst.mp3",
+      "bytes": 4991533,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/milf/Inst.ogg",
+      "bytes": 6955279,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/milf/Voices-Opponent.mp3",
+      "bytes": 4991533,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/milf/Voices-Opponent.ogg",
+      "bytes": 5808284,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/milf/Voices-Player.mp3",
+      "bytes": 4991533,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/milf/Voices-Player.ogg",
+      "bytes": 5611853,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/monster/Inst.mp3",
+      "bytes": 2843628,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/monster/Inst.ogg",
+      "bytes": 2830193,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/monster/Voices-Opponent.mp3",
+      "bytes": 2843628,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/monster/Voices-Opponent.ogg",
+      "bytes": 2539068,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/monster/Voices-Player.mp3",
+      "bytes": 2843628,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/monster/Voices-Player.ogg",
+      "bytes": 2848088,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/philly-nice/Inst.mp3",
+      "bytes": 3269280,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/philly-nice/Inst.ogg",
+      "bytes": 1115934,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/philly-nice/Voices-Opponent.mp3",
+      "bytes": 2857392,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/philly-nice/Voices-Opponent.ogg",
+      "bytes": 1024947,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/philly-nice/Voices-Player.mp3",
+      "bytes": 2845200,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/philly-nice/Voices-Player.ogg",
+      "bytes": 1014498,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/pico/Inst.mp3",
+      "bytes": 3397019,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/pico/Inst.ogg",
+      "bytes": 4823323,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/pico/Voices-Opponent.mp3",
+      "bytes": 3397019,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/pico/Voices-Opponent.ogg",
+      "bytes": 778585,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/pico/Voices-Player.mp3",
+      "bytes": 3397019,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/pico/Voices-Player.ogg",
+      "bytes": 3112500,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/roses/Inst.mp3",
+      "bytes": 2209376,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/roses/Inst.ogg",
+      "bytes": 1002546,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/roses/Voices-Opponent.mp3",
+      "bytes": 2209376,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/roses/Voices-Opponent.ogg",
+      "bytes": 929824,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/roses/Voices-Player.mp3",
+      "bytes": 2209376,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/roses/Voices-Player.ogg",
+      "bytes": 884421,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/satin-panties/Inst.mp3",
+      "bytes": 3845280,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/satin-panties/Inst.ogg",
+      "bytes": 5420953,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/satin-panties/Voices-Opponent.mp3",
+      "bytes": 3845280,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/satin-panties/Voices-Opponent.ogg",
+      "bytes": 4691025,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/satin-panties/Voices-Player.mp3",
+      "bytes": 3845280,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/satin-panties/Voices-Player.ogg",
+      "bytes": 4355540,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/senpai/Inst.mp3",
+      "bytes": 2561715,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/senpai/Inst.ogg",
+      "bytes": 1208420,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/senpai/Voices-Opponent.mp3",
+      "bytes": 2561715,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/senpai/Voices-Opponent.ogg",
+      "bytes": 1041253,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/senpai/Voices-Player.mp3",
+      "bytes": 2561715,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/senpai/Voices-Player.ogg",
+      "bytes": 1023851,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/south/Inst.mp3",
+      "bytes": 3553754,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/south/Inst.ogg",
+      "bytes": 4946132,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/south/Voices-Opponent.mp3",
+      "bytes": 3553754,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/south/Voices-Opponent.ogg",
+      "bytes": 3178769,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/south/Voices-Player.mp3",
+      "bytes": 3553754,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/south/Voices-Player.ogg",
+      "bytes": 3241464,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/spookeez/Inst.mp3",
+      "bytes": 2381784,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/spookeez/Inst.ogg",
+      "bytes": 1610616,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/spookeez/Voices-Opponent.mp3",
+      "bytes": 2381784,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/spookeez/Voices-Opponent.ogg",
+      "bytes": 870082,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/spookeez/Voices-Player.mp3",
+      "bytes": 2382411,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/spookeez/Voices-Player.ogg",
+      "bytes": 869430,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/stress/Inst.mp3",
+      "bytes": 2978630,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/stress/Inst.ogg",
+      "bytes": 1574834,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/stress/Voices-Opponent.mp3",
+      "bytes": 2978630,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/stress/Voices-Opponent.ogg",
+      "bytes": 721211,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/stress/Voices-Player.mp3",
+      "bytes": 2978630,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/stress/Voices-Player.ogg",
+      "bytes": 938296,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/thorns/Inst.mp3",
+      "bytes": 2487737,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/thorns/Inst.ogg",
+      "bytes": 1163305,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/thorns/Voices-Opponent.mp3",
+      "bytes": 2487737,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/thorns/Voices-Opponent.ogg",
+      "bytes": 1027843,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/thorns/Voices-Player.mp3",
+      "bytes": 2487737,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/thorns/Voices-Player.ogg",
+      "bytes": 970486,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/ugh/Inst.mp3",
+      "bytes": 2080226,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/ugh/Inst.ogg",
+      "bytes": 1262807,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/ugh/Voices-Opponent.mp3",
+      "bytes": 2080226,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/ugh/Voices-Opponent.ogg",
+      "bytes": 516524,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/ugh/Voices-Player.mp3",
+      "bytes": 2080226,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/ugh/Voices-Player.ogg",
+      "bytes": 472403,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/winter-horrorland/Inst.mp3",
+      "bytes": 3189280,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/winter-horrorland/Inst.ogg",
+      "bytes": 2604380,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/winter-horrorland/Voices-Opponent.mp3",
+      "bytes": 3189280,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/winter-horrorland/Voices-Opponent.ogg",
+      "bytes": 1928660,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/winter-horrorland/Voices-Player.mp3",
+      "bytes": 3189280,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/songs/winter-horrorland/Voices-Player.ogg",
+      "bytes": 2171350,
+      "category": "bundled song audio"
+    },
+    {
+      "path": "assets/base_game/videos/2hotCutscene.mp4",
+      "bytes": 2658115,
+      "category": "removed-week cutscenes"
+    },
+    {
+      "path": "assets/base_game/videos/blazinCutscene.mp4",
+      "bytes": 10395445,
+      "category": "removed-week cutscenes"
+    },
+    {
+      "path": "assets/base_game/videos/darnellCutscene.mp4",
+      "bytes": 14683508,
+      "category": "removed-week cutscenes"
+    },
+    {
+      "path": "assets/base_game/week2/images/halloween_bg.png",
+      "bytes": 4510676,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week2/images/halloween_bg.xml",
+      "bytes": 3663,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week2/images/halloween_bg_low.png",
+      "bytes": 204889,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week2/sounds/thunder_1.mp3",
+      "bytes": 137925,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week2/sounds/thunder_1.ogg",
+      "bytes": 66346,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week2/sounds/thunder_2.mp3",
+      "bytes": 274807,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week2/sounds/thunder_2.ogg",
+      "bytes": 126347,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week2/week2_stuff_here.txt",
+      "bytes": 0,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week3/images/philly/behindTrain.png",
+      "bytes": 21150,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week3/images/philly/city.png",
+      "bytes": 121010,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week3/images/philly/gradient.png",
+      "bytes": 2947,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week3/images/philly/particle.png",
+      "bytes": 485,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week3/images/philly/sky.png",
+      "bytes": 322855,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week3/images/philly/street.png",
+      "bytes": 99609,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week3/images/philly/train.png",
+      "bytes": 155906,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week3/images/philly/window.png",
+      "bytes": 9864,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week3/sounds/train_passes.mp3",
+      "bytes": 277982,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week3/sounds/train_passes.ogg",
+      "bytes": 258325,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week3/week3_stuff_here.txt",
+      "bytes": 0,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/images/gore/coldHeartKiller.png",
+      "bytes": 44166,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/images/gore/metalPole.png",
+      "bytes": 2012,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/images/gore/noooooo.png",
+      "bytes": 321314,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/images/gore/noooooo.xml",
+      "bytes": 14459,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/images/gore/stupidBlood.png",
+      "bytes": 13068,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/images/gore/stupidBlood.xml",
+      "bytes": 1721,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/images/limo/bgLimo.png",
+      "bytes": 672307,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/images/limo/bgLimo.xml",
+      "bytes": 794,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/images/limo/dumb.png",
+      "bytes": 14553,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/images/limo/fastCarLol.png",
+      "bytes": 275162,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/images/limo/limoDancer.png",
+      "bytes": 425744,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/images/limo/limoDancer.xml",
+      "bytes": 4675,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/images/limo/limoDrive.png",
+      "bytes": 478779,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/images/limo/limoDrive.xml",
+      "bytes": 515,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/images/limo/limoSunset.png",
+      "bytes": 883903,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/sounds/carPass0.mp3",
+      "bytes": 54621,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/sounds/carPass0.ogg",
+      "bytes": 47736,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/sounds/carPass1.mp3",
+      "bytes": 60069,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/sounds/carPass1.ogg",
+      "bytes": 50294,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/sounds/dancerdeath.mp3",
+      "bytes": 32391,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/sounds/dancerdeath.ogg",
+      "bytes": 40006,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week4/week4_stuff_here.txt",
+      "bytes": 0,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/images/christmas/bgEscalator.png",
+      "bytes": 48056,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/images/christmas/bgWalls.png",
+      "bytes": 745828,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/images/christmas/bottomBop.png",
+      "bytes": 1100222,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/images/christmas/bottomBop.xml",
+      "bytes": 4591,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/images/christmas/christmasTree.png",
+      "bytes": 68125,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/images/christmas/evilBG.png",
+      "bytes": 1008836,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/images/christmas/evilSnow.png",
+      "bytes": 8348,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/images/christmas/evilTree.png",
+      "bytes": 113550,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/images/christmas/fgSnow.png",
+      "bytes": 4286,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/images/christmas/santa.png",
+      "bytes": 648109,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/images/christmas/santa.xml",
+      "bytes": 2232,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/images/christmas/upperBop.png",
+      "bytes": 176250,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/images/christmas/upperBop.xml",
+      "bytes": 2046,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/sounds/Lights_Shut_off.mp3",
+      "bytes": 53174,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/sounds/Lights_Shut_off.ogg",
+      "bytes": 55298,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/sounds/Lights_Turn_On.mp3",
+      "bytes": 88390,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/sounds/Lights_Turn_On.ogg",
+      "bytes": 82248,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week5/week5_stuff_here.txt",
+      "bytes": 0,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/animatedEvilSchool.png",
+      "bytes": 86440,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/animatedEvilSchool.xml",
+      "bytes": 3887,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/animatedEvilSchool_low.png",
+      "bytes": 6780,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/bfPortrait.png",
+      "bytes": 3156,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/bfPortrait.xml",
+      "bytes": 1126,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/bgFreaks.png",
+      "bytes": 30914,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/bgFreaks.xml",
+      "bytes": 5211,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/bgGhouls.png",
+      "bytes": 19521,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/bgGhouls.xml",
+      "bytes": 1985,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/evilSchoolBG.png",
+      "bytes": 4774,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/evilSchoolFG.png",
+      "bytes": 1774,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/petals.png",
+      "bytes": 1617,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/petals.xml",
+      "bytes": 4557,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/pixelUI/dialogueBox-evil.png",
+      "bytes": 209,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/pixelUI/dialogueBox-evil.xml",
+      "bytes": 1385,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/pixelUI/dialogueBox-pixel.png",
+      "bytes": 2618,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/pixelUI/dialogueBox-pixel.xml",
+      "bytes": 680,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/pixelUI/dialogueBox-senpaiMad.png",
+      "bytes": 8391,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/pixelUI/dialogueBox-senpaiMad.xml",
+      "bytes": 1050,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/pixelUI/hand_textbox.png",
+      "bytes": 171,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/senpaiCrazy.png",
+      "bytes": 5503,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/senpaiCrazy.xml",
+      "bytes": 19805,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/senpaiPortrait.png",
+      "bytes": 4656,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/senpaiPortrait.xml",
+      "bytes": 1103,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/spiritFaceForward.png",
+      "bytes": 787,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/weebSchool.png",
+      "bytes": 4034,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/weebSky.png",
+      "bytes": 2714,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/weebStreet.png",
+      "bytes": 3885,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/weebTrees.png",
+      "bytes": 119590,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/weebTrees.txt",
+      "bytes": 529,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/images/weeb/weebTreesBack.png",
+      "bytes": 663,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/music/Lunchbox.mp3",
+      "bytes": 1181760,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/music/Lunchbox.ogg",
+      "bytes": 491250,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/music/LunchboxScary.mp3",
+      "bytes": 275451,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/music/LunchboxScary.ogg",
+      "bytes": 253221,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/music/gameOver-pixel.mp3",
+      "bytes": 3072000,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/music/gameOver-pixel.ogg",
+      "bytes": 1625233,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/music/gameOverEnd-pixel.mp3",
+      "bytes": 192000,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/music/gameOverEnd-pixel.ogg",
+      "bytes": 94419,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/sounds/Senpai_Dies.mp3",
+      "bytes": 159129,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/sounds/Senpai_Dies.ogg",
+      "bytes": 136579,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/sounds/fnf_loss_sfx-pixel.mp3",
+      "bytes": 74226,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/sounds/fnf_loss_sfx-pixel.ogg",
+      "bytes": 64518,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/sounds/pixelText.mp3",
+      "bytes": 1793,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/sounds/pixelText.ogg",
+      "bytes": 4567,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week6/week6_stuff_here.txt",
+      "bytes": 0,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/cutscenes/picoAppears/Animation.json",
+      "bytes": 760156,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/cutscenes/picoAppears/spritemap1.json",
+      "bytes": 11555,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/cutscenes/picoAppears/spritemap1.png",
+      "bytes": 1077475,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/cutscenes/tankman/Animation.json",
+      "bytes": 1624755,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/cutscenes/tankman/spritemap1.json",
+      "bytes": 8464,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/cutscenes/tankman/spritemap1.png",
+      "bytes": 358295,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/smokeLeft.png",
+      "bytes": 2219041,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/smokeLeft.xml",
+      "bytes": 7524,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/smokeRight.png",
+      "bytes": 2455333,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/smokeRight.xml",
+      "bytes": 7387,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tank0.png",
+      "bytes": 98968,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tank0.xml",
+      "bytes": 2394,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tank1.png",
+      "bytes": 43348,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tank1.xml",
+      "bytes": 2412,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tank2.png",
+      "bytes": 67215,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tank2.xml",
+      "bytes": 2324,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tank3.png",
+      "bytes": 50850,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tank3.xml",
+      "bytes": 2414,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tank4.png",
+      "bytes": 118261,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tank4.xml",
+      "bytes": 2382,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tank5.png",
+      "bytes": 98727,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tank5.xml",
+      "bytes": 2398,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tankBuildings.png",
+      "bytes": 50121,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tankClouds.png",
+      "bytes": 4178,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tankGround.png",
+      "bytes": 125274,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tankMountains.png",
+      "bytes": 69674,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tankRolling.png",
+      "bytes": 109393,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tankRolling.xml",
+      "bytes": 613,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tankRuins.png",
+      "bytes": 414815,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tankSky.png",
+      "bytes": 25636,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tankWatchtower.png",
+      "bytes": 158527,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tankWatchtower.xml",
+      "bytes": 2460,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tankmanKilled1.png",
+      "bytes": 492132,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/images/tankmanKilled1.xml",
+      "bytes": 7724,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/music/DISTORTO.mp3",
+      "bytes": 872640,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/music/DISTORTO.ogg",
+      "bytes": 411014,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/bfBeep.mp3",
+      "bytes": 7656,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/bfBeep.ogg",
+      "bytes": 12008,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-1.mp3",
+      "bytes": 66857,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-1.ogg",
+      "bytes": 57971,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-10.mp3",
+      "bytes": 50955,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-10.ogg",
+      "bytes": 44305,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-11.mp3",
+      "bytes": 72883,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-11.ogg",
+      "bytes": 58283,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-12.mp3",
+      "bytes": 40694,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-12.ogg",
+      "bytes": 34031,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-13.mp3",
+      "bytes": 106166,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-13.ogg",
+      "bytes": 88876,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-14.mp3",
+      "bytes": 56160,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-14.ogg",
+      "bytes": 46613,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-15.mp3",
+      "bytes": 65167,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-15.ogg",
+      "bytes": 53382,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-16.mp3",
+      "bytes": 26593,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-16.ogg",
+      "bytes": 25649,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-17.mp3",
+      "bytes": 59393,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-17.ogg",
+      "bytes": 48358,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-18.mp3",
+      "bytes": 95792,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-18.ogg",
+      "bytes": 79945,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-19.mp3",
+      "bytes": 68103,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-19.ogg",
+      "bytes": 55554,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-2.mp3",
+      "bytes": 69808,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-2.ogg",
+      "bytes": 56224,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-20.mp3",
+      "bytes": 80735,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-20.ogg",
+      "bytes": 64679,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-21.mp3",
+      "bytes": 41325,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-21.ogg",
+      "bytes": 35510,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-22.mp3",
+      "bytes": 62399,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-22.ogg",
+      "bytes": 51586,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-23.mp3",
+      "bytes": 51085,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-23.ogg",
+      "bytes": 43114,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-24.mp3",
+      "bytes": 55041,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-24.ogg",
+      "bytes": 46350,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-25.mp3",
+      "bytes": 105326,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-25.ogg",
+      "bytes": 86740,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-3.mp3",
+      "bytes": 68342,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-3.ogg",
+      "bytes": 55903,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-4.mp3",
+      "bytes": 74720,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-4.ogg",
+      "bytes": 63244,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-5.mp3",
+      "bytes": 51076,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-5.ogg",
+      "bytes": 43411,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-6.mp3",
+      "bytes": 50948,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-6.ogg",
+      "bytes": 43034,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-7.mp3",
+      "bytes": 60858,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-7.ogg",
+      "bytes": 49543,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-8.mp3",
+      "bytes": 53059,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-8.ogg",
+      "bytes": 45484,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-9.mp3",
+      "bytes": 47561,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/jeffGameover/jeffGameover-9.ogg",
+      "bytes": 41148,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/killYou.mp3",
+      "bytes": 83715,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/killYou.ogg",
+      "bytes": 70042,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/stressCutscene.mp3",
+      "bytes": 859992,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/stressCutscene.ogg",
+      "bytes": 668091,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/tankSong2.mp3",
+      "bytes": 148322,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/tankSong2.ogg",
+      "bytes": 124712,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/wellWellWell.mp3",
+      "bytes": 40176,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/week7/sounds/wellWellWell.ogg",
+      "bytes": 37112,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/CanImpactParticle.png",
+      "bytes": 8841,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/CanImpactParticle.xml",
+      "bytes": 725,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/NeneKnifeToss.png",
+      "bytes": 131265,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/NeneKnifeToss.xml",
+      "bytes": 2629,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/PicoBullet.png",
+      "bytes": 11047,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/PicoBullet.xml",
+      "bytes": 6986,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/Pico_Death_Retry.png",
+      "bytes": 815433,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/Pico_Death_Retry.xml",
+      "bytes": 6356,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/SpraycanPile.png",
+      "bytes": 17483,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/abot/aBotViz.png",
+      "bytes": 16006,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/abot/aBotViz.xml",
+      "bytes": 5133,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/abot/abotSystem/Animation.json",
+      "bytes": 43821,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/abot/abotSystem/spritemap1.json",
+      "bytes": 974,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/abot/abotSystem/spritemap1.png",
+      "bytes": 72637,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/abot/stereoBG.png",
+      "bytes": 1638,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/abot/systemEyes/Animation.json",
+      "bytes": 7360,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/abot/systemEyes/spritemap1.json",
+      "bytes": 306,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/abot/systemEyes/spritemap1.png",
+      "bytes": 627,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyBlazin/lightning.png",
+      "bytes": 179983,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyBlazin/lightning.xml",
+      "bytes": 4265,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyBlazin/skyBlur.png",
+      "bytes": 286364,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyBlazin/streetBlur.png",
+      "bytes": 333464,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyStreets/phillyCars.png",
+      "bytes": 13159,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyStreets/phillyCars.xml",
+      "bytes": 382,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyStreets/phillyConstruction.png",
+      "bytes": 15681,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyStreets/phillyForeground.png",
+      "bytes": 495009,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyStreets/phillyForegroundCity.png",
+      "bytes": 4066,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyStreets/phillyHighway.png",
+      "bytes": 27137,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyStreets/phillyHighwayLights.png",
+      "bytes": 6979,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyStreets/phillyHighwayLights_lightmap.png",
+      "bytes": 39615,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyStreets/phillySkybox.png",
+      "bytes": 604767,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyStreets/phillySkyline.png",
+      "bytes": 14240,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyStreets/phillySmog.png",
+      "bytes": 1650154,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyStreets/phillyTraffic.png",
+      "bytes": 255470,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyStreets/phillyTraffic.xml",
+      "bytes": 10943,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyStreets/phillyTraffic_lightmap.png",
+      "bytes": 19824,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/phillyStreets/puddle.png",
+      "bytes": 79661,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/spraycanAtlas/Animation.json",
+      "bytes": 34470,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/spraycanAtlas/spritemap1.json",
+      "bytes": 3133,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/spraycanAtlas/spritemap1.png",
+      "bytes": 626508,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/spraypaintExplosionEZ.png",
+      "bytes": 386207,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/images/spraypaintExplosionEZ.xml",
+      "bytes": 2265,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/music/darnellCanCutscene.ogg",
+      "bytes": 121979,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/music/gameOver-pico.ogg",
+      "bytes": 472005,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/music/gameOverEnd-pico.ogg",
+      "bytes": 28605,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/music/gameOverStart-pico-explode.ogg",
+      "bytes": 707676,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/Darnell_Lighter.ogg",
+      "bytes": 16337,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/Gun_Prep.ogg",
+      "bytes": 13532,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/Kick_Can_FORWARD.ogg",
+      "bytes": 17218,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/Kick_Can_UP.ogg",
+      "bytes": 13094,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/Pico_Bonk.ogg",
+      "bytes": 15805,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/cutscene/darnell_laugh.ogg",
+      "bytes": 27088,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/cutscene/nene_laugh.ogg",
+      "bytes": 43193,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/fnf_loss_sfx-pico-explode.ogg",
+      "bytes": 139746,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/fnf_loss_sfx-pico-gutpunch.ogg",
+      "bytes": 62841,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/fnf_loss_sfx-pico.ogg",
+      "bytes": 80967,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/lightning/Lightning1.ogg",
+      "bytes": 229704,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/lightning/Lightning2.ogg",
+      "bytes": 255429,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/lightning/Lightning3.ogg",
+      "bytes": 184266,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/shots/shot1.ogg",
+      "bytes": 61732,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/shots/shot2.ogg",
+      "bytes": 61710,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/shots/shot3.ogg",
+      "bytes": 61647,
+      "category": "week-specific stage media"
+    },
+    {
+      "path": "assets/base_game/weekend1/sounds/shots/shot4.ogg",
+      "bytes": 61643,
+      "category": "week-specific stage media"
+    }
+  ],
+  "relocated": [
+    {
+      "from": "assets/base_game/week1/images/smoke.png",
+      "to": "assets/base_game/shared/images/smoke.png",
+      "bytes": 3731,
+      "sha256": "41e7051ba75f73e41602ce4dbc67516d3c9389b14d1d208cea43f71cde04f578",
+      "reason": "Tutorial stage, character/stage editor backgrounds and reusable spotlight event"
+    },
+    {
+      "from": "assets/base_game/week1/images/spotlight.png",
+      "to": "assets/base_game/shared/images/spotlight.png",
+      "bytes": 12487,
+      "sha256": "782fa1d3ae698f70b7565ed1429d59d88a56adb2a55fee34626dfc9ed497a2c4",
+      "reason": "Tutorial stage, character/stage editor backgrounds and reusable spotlight event"
+    },
+    {
+      "from": "assets/base_game/week1/images/stage_light.png",
+      "to": "assets/base_game/shared/images/stage_light.png",
+      "bytes": 7324,
+      "sha256": "81b9c807d9c5aed8d9a9d550eef8456212da6eef6f62a6c47fb4355630f11b8d",
+      "reason": "Tutorial stage, character/stage editor backgrounds and reusable spotlight event"
+    },
+    {
+      "from": "assets/base_game/week1/images/stageback.png",
+      "to": "assets/base_game/shared/images/stageback.png",
+      "bytes": 14010,
+      "sha256": "63d0b92502632c1b201f00686fa37da2cd4ff693602e94afde7869640ce4ee27",
+      "reason": "Tutorial stage, character/stage editor backgrounds and reusable spotlight event"
+    },
+    {
+      "from": "assets/base_game/week1/images/stagecurtains.png",
+      "to": "assets/base_game/shared/images/stagecurtains.png",
+      "bytes": 123947,
+      "sha256": "485bdc9472356ef87cf4aac83a2d80cde3f61b9ec4a975a713ab6d6913417b1a",
+      "reason": "Tutorial stage, character/stage editor backgrounds and reusable spotlight event"
+    },
+    {
+      "from": "assets/base_game/week1/images/stagefront.png",
+      "to": "assets/base_game/shared/images/stagefront.png",
+      "bytes": 120269,
+      "sha256": "e96e1e1ae4fa479e34b964373bf853d63dc4c9b587dbf260ab73ed1b9f76e566",
+      "reason": "Tutorial stage, character/stage editor backgrounds and reusable spotlight event"
+    }
+  ],
+  "protected": [
+    {
+      "path": "assets/base_game/shared/weeks/tutorial.json",
+      "bytes": 274,
+      "sha256": "065935039f00bf45bc8ee6c523346f3db3848ce371f68d37e0666f44485a8e38",
+      "reason": "Tutorial metadata, charts, events or audio"
+    },
+    {
+      "path": "assets/base_game/shared/images/storymenu/tutorial.png",
+      "bytes": 7056,
+      "sha256": "a02996e6e8613990888fa10231193d896f73bda048cc7d9344b74bd6f15c6e7a",
+      "reason": "Tutorial metadata, charts, events or audio"
+    },
+    {
+      "path": "assets/base_game/shared/data/tutorial/tutorial.json",
+      "bytes": 5767,
+      "sha256": "5a315c2a0769d6298276b1479fd7eb6620a97217f7eb88c4719da4c7b79f2fd4",
+      "reason": "Tutorial metadata, charts, events or audio"
+    },
+    {
+      "path": "assets/base_game/shared/data/tutorial/events.json",
+      "bytes": 230,
+      "sha256": "4c17291183824f359e52350b1161759d0c7e25c805444c9cc7192f3603a62c05",
+      "reason": "Tutorial metadata, charts, events or audio"
+    },
+    {
+      "path": "assets/base_game/shared/data/tutorial/tutorial-easy.json",
+      "bytes": 5767,
+      "sha256": "5a315c2a0769d6298276b1479fd7eb6620a97217f7eb88c4719da4c7b79f2fd4",
+      "reason": "Tutorial metadata, charts, events or audio"
+    },
+    {
+      "path": "assets/base_game/shared/data/tutorial/tutorial-hard.json",
+      "bytes": 6640,
+      "sha256": "bd6850e4cf2884658d2f79f2640d4236f0911c9adaa061ac5cb7f1349baa1b8b",
+      "reason": "Tutorial metadata, charts, events or audio"
+    },
+    {
+      "path": "assets/base_game/songs/tutorial/Voices-Opponent.ogg",
+      "bytes": 593596,
+      "sha256": "be9a61ef53338db310c0c2ad5ef2ae8f59c3c9d7815b3a4e889d06342c29ac01",
+      "reason": "Tutorial metadata, charts, events or audio"
+    },
+    {
+      "path": "assets/base_game/songs/tutorial/Inst.mp3",
+      "bytes": 1614411,
+      "sha256": "e9ffca3d7e3cefb926345b6199f73587f679bbae747b43e85ce16d05f5866164",
+      "reason": "Tutorial metadata, charts, events or audio"
+    },
+    {
+      "path": "assets/base_game/songs/tutorial/Voices-Player.mp3",
+      "bytes": 1614411,
+      "sha256": "f0061d59a74a4a552260d828ac7d6bd90799485bf0bdf383ff579ac790f3a071",
+      "reason": "Tutorial metadata, charts, events or audio"
+    },
+    {
+      "path": "assets/base_game/songs/tutorial/Voices-Player.ogg",
+      "bytes": 558444,
+      "sha256": "c64c101e153c6b7ca5cb68fd90749a4a8d572044156415dac7cc1c106256bf71",
+      "reason": "Tutorial metadata, charts, events or audio"
+    },
+    {
+      "path": "assets/base_game/songs/tutorial/Inst.ogg",
+      "bytes": 765252,
+      "sha256": "65005187c655ab264416527bdce21e1f010330db254faa84cdf86a259c649d03",
+      "reason": "Tutorial metadata, charts, events or audio"
+    },
+    {
+      "path": "assets/base_game/songs/tutorial/Voices-Opponent.mp3",
+      "bytes": 1614411,
+      "sha256": "710e5bfd471edaa6cf2010bec19d37ac61495ca4af7837c783354f6b965fe638",
+      "reason": "Tutorial metadata, charts, events or audio"
+    }
+  ],
+  "source_assets_after": {
+    "files": 424,
+    "bytes": 95908087
+  },
+  "removed_bytes": 469658055,
+  "protected_shared_resources": {
+    "assets/shared/": "Engine UI, BF/GF/death sprites, dialogue portraits, fonts, sounds, notes and mod fallbacks retained; lists updated separately",
+    "assets/base_game/shared/characters/dad.json": "Default chart/stage editor opponent; not a playable built-in week",
+    "assets/base_game/shared/images/characters/DADDY_DEAREST.*": "Default editor opponent atlas",
+    "assets/base_game/shared/images/menucharacters/Menu_Dad.*": "Existing menu character editor starter atlas",
+    "assets/base_game/shared/images/icons/": "Small reusable icon fallbacks, including old BF toggle",
+    "assets/base_game/songs/test/": "Chart editor internal default song; no playable week metadata",
+    "assets/base_game/shared/data/test/": "Internal chart editor test chart",
+    "example_mods/": "Untouched sample mod content"
+  }
+}

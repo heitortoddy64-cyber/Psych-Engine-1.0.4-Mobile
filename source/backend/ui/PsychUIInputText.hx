@@ -102,6 +102,7 @@ class PsychUIInputText extends FlxSpriteGroup
 
 	var _nextAccent:AccentCode = NONE;
 	public var inInsertMode:Bool = false;
+	public var showKeyboardOnFocus:Bool = true;
 	function onKeyDown(e:KeyboardEvent)
 	{
 		if(focusOn != this) return;
@@ -110,6 +111,7 @@ class PsychUIInputText extends FlxSpriteGroup
 		var charCode:Int = e.charCode;
 		var flxKey:FlxKey = cast keyCode;
 		#if mobile
+		if(flxKey == ENTER || flxKey == ESCAPE) { focusOn = null; EditorInput.ignoreBack = true; return; }
 		if(flxKey != BACKSPACE && flxKey != DELETE) return;
 		#end
 
@@ -399,6 +401,7 @@ class PsychUIInputText extends FlxSpriteGroup
 		for (i in 0...e.text.length)
 		{
 			var charCode:Int = e.text.charCodeAt(i);
+			if(charCode == 10 || charCode == 13) { focusOn = null; return; }
 			if(charCode == 8 || charCode == 127)
 			{
 				if(selectIndex > -1 && selectIndex != caretIndex)
@@ -437,7 +440,7 @@ class PsychUIInputText extends FlxSpriteGroup
 		}
 		#if mobile
 		if(FlxG.stage != null && FlxG.stage.window != null)
-			FlxG.stage.window.textInputEnabled = v != null;
+			FlxG.stage.window.textInputEnabled = v != null && v.showKeyboardOnFocus;
 		#end
 		return (focusOn = v);
 	}
@@ -446,9 +449,9 @@ class PsychUIInputText extends FlxSpriteGroup
 	{
 		super.update(elapsed);
 
-		if(FlxG.mouse.justPressed)
+		if(EditorPointer.justPressed)
 		{
-			if(FlxG.mouse.overlaps(behindText, camera))
+			if(EditorPointer.overlaps(behindText, camera))
 			{
 				if(!FlxG.keys.pressed.SHIFT) selectIndex = -1;
 				else if(selectIndex == -1) selectIndex = caretIndex;
@@ -456,7 +459,7 @@ class PsychUIInputText extends FlxSpriteGroup
 				caretIndex = 0;
 				var lastBound:Float = 0;
 				var textObjX:Float = textObj.getScreenPosition(camera).x;
-				var mousePosX:Float = FlxG.mouse.getScreenPosition(camera).x;
+				var mousePosX:Float = EditorPointer.getScreenPosition(camera).x;
 				var txtX:Float = textObjX - textObj.textField.scrollH;
 
 				for (i => bound in _boundaries)
@@ -471,7 +474,7 @@ class PsychUIInputText extends FlxSpriteGroup
 				}
 				updateCaret();
 			}
-			else if(focusOn == this)
+			else if(focusOn == this && !(EditorPointer.touchActive && Std.isOfType(this, PsychUIDropDownMenu)))
 				focusOn = null;
 
 			//trace('changed focus to: ' + this);
