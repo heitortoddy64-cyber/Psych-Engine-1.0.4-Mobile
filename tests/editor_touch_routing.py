@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 FILES={
 'import.hx':'''import support.Stubs; import backend.ui.*;''',
 'flixel/FlxBasic.hx':'''package flixel; class FlxBasic { public var exists=true;public var active=true;public var visible=true;public var alpha:Float=1;public var cameras:Array<support.Stubs.FlxCamera>;public function new(){} public function update(e:Float){}public function destroy(){exists=false;} }''',
-'flixel/input/keyboard/FlxKey.hx':'''package flixel.input.keyboard; enum abstract FlxKey(Int) from Int to Int {var ESCAPE=27;var SHIFT=16;var CONTROL=17;var ENTER=13;var UP=38;var DOWN=40;var LEFT=37;var RIGHT=39;var W=87;var C=67;var DELETE=46;public static function fromString(v:String):FlxKey {if(v.length==1)return v.charCodeAt(0);return switch(v){case 'ESCAPE':27;case 'SHIFT':16;case 'CONTROL':17;case 'ENTER':13;case 'UP':38;case 'DOWN':40;case 'LEFT':37;case 'RIGHT':39;case 'DELETE':46;default:200+v.length;};}}''',
+'flixel/input/keyboard/FlxKey.hx':'''package flixel.input.keyboard; enum abstract FlxKey(Int) from Int to Int {var ESCAPE=27;var ALT=18;var SHIFT=16;var CONTROL=17;var ENTER=13;var UP=38;var DOWN=40;var LEFT=37;var RIGHT=39;var W=87;var C=67;var DELETE=46;public static function fromString(v:String):FlxKey {if(v.length==1)return v.charCodeAt(0);return switch(v){case 'ESCAPE':27;case 'SHIFT':16;case 'CONTROL':17;case 'ENTER':13;case 'UP':38;case 'DOWN':40;case 'LEFT':37;case 'RIGHT':39;case 'DELETE':46;default:200+v.length;};}}''',
 'flixel/input/FlxInput.hx':'''package flixel.input; enum abstract FlxInputState(Int) from Int {var JUST_PRESSED=2;var PRESSED=1;var JUST_RELEASED=-1;var RELEASED=0;}''',
 'flixel/input/FlxPointer.hx':'''package flixel.input; import support.Stubs; class FlxPointer {public var x:Int;public var y:Int;public var screenX:Int;public var screenY:Int;public function new(x=0,y=0){this.x=screenX=x;this.y=screenY=y;}public function getScreenPosition(?c:FlxCamera,?p:FlxPoint):FlxPoint return new FlxPoint(screenX,screenY);public function getWorldPosition(?c:FlxCamera,?p:FlxPoint):FlxPoint return getScreenPosition(c,p);public function getPositionInCameraView(?c:FlxCamera,?p:FlxPoint):FlxPoint return getScreenPosition(c,p);public function overlaps(b:flixel.FlxBasic,?c:FlxCamera):Bool return false;}''',
 'flixel/input/touch/FlxTouch.hx':'''package flixel.input.touch; class FlxTouch extends flixel.input.FlxPointer {public var touchPointID:Int;public var pressed=true;public var justPressed=true;public var justReleased=false;public function new(x,y,id){super(x,y);touchPointID=id;}}''',
@@ -69,7 +69,15 @@ class Routing {
   FileDialogHandler.isBusy=true;frame([new FlxTouch(900,300,8)]);check(EditorPointer.blocked&&c.primary==-1&&!EditorInput.keys.pressed(87),'SAF blocks/cancels');FileDialogHandler.isBusy=false;frame([]);
   PsychUIInputText.focusOn=new PsychUIInputText();frame([]);check(c.boxes.length==1,'IME relinquishes toolbar');FlxG.android.justReleased.BACK=true;frame([]);check(PsychUIInputText.focusOn==null&&!EditorInput.backPressed(),'IME Back never exits editor');FlxG.android.justReleased.BACK=false;frame([]);frame([]);
   c.page=1;c.expanded=true;c.rebuild();box=c.boxes.filter(b->b.action!=null && b.action.label=='Scrub back')[0];movement=new FlxTouch(Std.int(box.x+30),Std.int(box.y+25),9);frame([movement]);FlxG.signals.focusLost.dispatch();check(!EditorInput.keys.pressed(87)&&c.primary==-1,'focus loss clears');
+  c.precise=true;frame([]);check(EditorInput.keys.pressed(18)&&!EditorInput.keys.pressed(17),'Chart fine seek uses Alt, not move modifier');c.precise=false;
   c.destroy();check(FlxG.plugins.list.length==0&&FlxG.cameras.list.length==0&&!EditorInput.active,'destroy removes input plugin/cameras');
+  for(profile in ['Character','Stage','Portrait','Splash','Menu Character','Dialogue','Week','Master']) {
+   var nextState=new MusicBeatState();EditorTouchControls.install(nextState,profile);var toolbar:EditorTouchControls=cast nextState.members[0];
+   check(!Lambda.exists(toolbar.pages[0].actions,a->a.label=='Select/tap'||a.label=='Move/tap'),'note-only modes hidden in '+profile);
+   check(toolbar.allowPrecise==(['Character','Stage'].contains(profile)),'precision command exists in '+profile);
+   check(toolbar.allowFast==(['Character','Stage','Portrait','Splash','Menu Character'].contains(profile)),'fast command exists in '+profile);
+   toolbar.destroy();
+  }
   Sys.println('PASS: '+assertions+' actual editor routing assertions with headless framework stand-ins; no device/UI test');
  }
 }'''

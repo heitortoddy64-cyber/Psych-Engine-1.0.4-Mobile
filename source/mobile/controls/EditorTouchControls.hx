@@ -21,6 +21,10 @@ class EditorTouchControls extends FlxSpriteGroup
  var expanded:Bool = false;
  var dockTop:Bool = false;
  var pointerMode:Int = 0;
+ var profile:String;
+ var modes:Array<Int>;
+ var allowFast:Bool;
+ var allowPrecise:Bool;
  var fast:Bool = false;
  var precise:Bool = false;
  var panUI:Bool = false;
@@ -43,12 +47,18 @@ class EditorTouchControls extends FlxSpriteGroup
 
  function new(state:MusicBeatState, profile:String)
  {
-  super(); owner = state;
+  super(); owner = state;this.profile=profile;
+  modes=profile=='Chart'?[0,1,2,3]:['Character','Stage'].contains(profile)?[0,1]:[0];
+  allowFast=['Chart','Character','Stage','Portrait','Splash','Menu Character'].contains(profile);
+  allowPrecise=['Chart','Character','Stage'].contains(profile);
   ui = new FlxCamera(); ui.bgColor = 0; FlxG.cameras.add(ui, false);
   for(member in state.members) if(member != null && containsUI(member)) bindPanel(cast member);
   hud = new FlxCamera(); hud.bgColor = 0; FlxG.cameras.add(hud, false); cameras = [hud];
   scrollFactor.set();
-  addPage('VIEW', ['Edit/tap:', 'Drag/right:', 'Select/tap:', 'Move/tap:', 'UI pan:', 'UI zoom:', 'Reset UI:', 'Dock:']);
+  var view=['UI pan:', 'UI zoom:', 'Reset UI:', 'Dock:'];
+  if(modes.length>1) {view.unshift('Drag/right:');view.unshift('Edit/tap:');}
+  if(profile=='Chart') {view.push('Select/tap:');view.push('Move/tap:');}
+  addPage('VIEW',view);
   switch(profile)
   {
    case 'Chart':
@@ -59,25 +69,27 @@ class EditorTouchControls extends FlxSpriteGroup
     addPage('TOOLS', ['Reset section:R','Help:F1','Preview:F12','Scroll up:','Scroll down:','Fast:', 'Precise:', 'Reset speed:ALT+LBRACKET']);
    case 'Character', 'Stage', 'Portrait':
     addPage('CAMERA', ['Pan left:J','Pan right:L','Pan up:I','Pan down:K','Zoom out:Q','Zoom in:E','Reset view:R','Fast:']);
-    addPage('OFFSETS', ['Offset left:LEFT','Offset right:RIGHT','Offset up:UP','Offset down:DOWN','Fast:','Precise:']);
+    var offsetActions=['Offset left:LEFT','Offset right:RIGHT','Offset up:UP','Offset down:DOWN','Fast:'];
+    if(allowPrecise) offsetActions.push('Precise:');
+    addPage('OFFSETS',offsetActions);
     if(profile=='Character') {
      addPage('ANIMATION', ['Animation back:W','Animation next:S','Replay:SPACE','Frame back:A','Frame next:D','Ghost:F12','Help:F1']);
      addPage('OFFSET TOOLS', ['Copy:CONTROL+C','Paste:CONTROL+V','Reset:CONTROL+R','Undo:CONTROL+Z']);
     }
     if(profile=='Portrait') addPage('ANIMATION', ['Animation back:W','Animation next:S','Replay:SPACE','Ghost / bubble:H']);
     if(profile=='Stage') addPage('ANIMATION', ['Animation back:W','Animation next:S','Replay:SPACE','Reset offset:CONTROL+R','Help:F1']);
-    if(profile == 'Portrait') addPage('LOOP OFFSET', ['Loop left:A','Loop right:D','Loop up:W','Loop down:S','Fast:','Precise:']);
+    if(profile == 'Portrait') addPage('LOOP OFFSET', ['Loop left:A','Loop right:D','Loop up:W','Loop down:S','Fast:']);
     if(profile == 'Stage') addPage('STAGE', ['Sprite back:W','Sprite next:S','Toggle UI:F2','Toggle info:F3','Selection:F12','Fast:','Precise:','Help:F1']);
    case 'Dialogue':
     addPage('DIALOGUE', ['Line back:D','Line next:A','Animation back:W','Animation next:S','Replay:SPACE','Add line:O','Delete line:P']);
    case 'Splash':
     addPage('OFFSETS', ['Offset left:LEFT','Offset right:RIGHT','Offset up:UP','Offset down:DOWN','Replay:SPACE','Copy:CONTROL+C','Paste:CONTROL+V','Reset:CONTROL+R']);
-    addPage('TOOLS', ['Fast:','Precise:','Help:F1','Scroll up:','Scroll down:']);
+    addPage('TOOLS', ['Fast:','Help:F1']);
    case 'Menu Character':
     addPage('POSITION', ['Offset left:LEFT','Offset right:RIGHT','Offset up:UP','Offset down:DOWN','Replay:SPACE','Fast:']);
    case 'Week': // Metadata and file actions use the existing widgets.
    default:
-    addPage('NAVIGATE', ['Up:UP','Down:DOWN','Left:LEFT','Right:RIGHT','Confirm:ENTER','Scroll up:','Scroll down:']);
+    addPage('NAVIGATE', ['Up:UP','Down:DOWN','Left:LEFT','Right:RIGHT','Confirm:ENTER']);
   }
   EditorInput.reset(); EditorInput.active = true; EditorInput.touchActive = true;
   rebuild();
@@ -140,9 +152,15 @@ class EditorTouchControls extends FlxSpriteGroup
   button(150,y,210,52,(expanded ? 'HIDE ' : 'TOUCH ') + pages[page].name,function() { expanded = !expanded; rebuild(); });
   button(360,y,100,52,'PAGE <',function() { page = FlxMath.wrap(page-1,0,pages.length-1); rebuild(); });
   button(460,y,100,52,'PAGE >',function() { page = FlxMath.wrap(page+1,0,pages.length-1); rebuild(); });
-  button(560,y,270,52,(panUI?'UI PAN':'MODE '+['EDIT','DRAG','SELECT','MOVE'][pointerMode]),function() { pointerMode=(pointerMode+1)%4; rebuild(); });
-  button(830,y,210,52,'FAST '+(fast?'ON':'OFF'),function(){ fast=!fast; rebuild(); });
-  button(1040,y,240,52,'PRECISE '+(precise?'ON':'OFF'),function(){ precise=!precise; rebuild(); });
+  button(560,y,270,52,(panUI?'UI PAN ON':modes.length>1?'MODE '+['EDIT','DRAG','SELECT','MOVE'][pointerMode]:'UI PAN OFF'),function() {
+   if(modes.length>1) {pointerMode=modes[(modes.indexOf(pointerMode)+1)%modes.length];panUI=false;}
+   else panUI=!panUI;
+   rebuild();
+  });
+  if(allowFast) button(830,y,210,52,'FAST '+(fast?'ON':'OFF'),function(){ fast=!fast; rebuild(); });
+  else button(830,y,210,52,'UI ZOOM',function(){command({label:'UI zoom',keys:[],hold:false});});
+  if(allowPrecise) button(1040,y,240,52,(profile=='Chart'?'FINE SEEK ':'PRECISE ')+(precise?'ON':'OFF'),function(){ precise=!precise; rebuild(); });
+  else button(1040,y,240,52,'DOCK '+(dockTop?'BOTTOM':'TOP'),function(){dockTop=!dockTop;rebuild();});
   if(!expanded) return;
   for(i => action in pages[page].actions)
   {
@@ -156,10 +174,10 @@ class EditorTouchControls extends FlxSpriteGroup
   if(a.keys.length > 0) for(key in a.keys) EditorInput.keys.hold(key);
   else switch(a.label)
   {
-   case 'Edit/tap': pointerMode=0;
-   case 'Drag/right': pointerMode=1;
-   case 'Select/tap': pointerMode=2;
-   case 'Move/tap': pointerMode=3;
+   case 'Edit/tap': pointerMode=0;panUI=false;
+   case 'Drag/right': pointerMode=1;panUI=false;
+   case 'Select/tap': pointerMode=2;panUI=false;
+   case 'Move/tap': pointerMode=3;panUI=false;
    case 'UI pan': panUI=!panUI;
    case 'UI zoom': ui.zoom = ui.zoom >= 4 ? 1 : ui.zoom+0.5;
    case 'Reset UI': ui.zoom=1; ui.scroll.set(); panUI=false;
@@ -241,7 +259,7 @@ class EditorTouchControls extends FlxSpriteGroup
     if(touch.justReleased) primary=-1;
    }
   }
-  if(!focused && !modal) { if(fast) EditorInput.keys.hold(FlxKey.SHIFT); if(precise) EditorInput.keys.hold(FlxKey.CONTROL); }
+  if(!focused && !modal) { if(fast) EditorInput.keys.hold(FlxKey.SHIFT); if(precise && allowPrecise) EditorInput.keys.hold(profile=='Chart'?FlxKey.ALT:FlxKey.CONTROL); }
   // A cancelled/lost contact must never retain a pointer or a command.
   if(primary>=0 && !Lambda.exists(FlxG.touches.list, function(t) return t.touchPointID==primary)) cancelPointer();
   var lost:Array<Int>=[];

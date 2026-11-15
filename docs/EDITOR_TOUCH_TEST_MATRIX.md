@@ -25,7 +25,7 @@ Shared implementation: `backend/ui/EditorInput`, `EditorKeyState`, `EditorPointe
 ## Executed automated checks
 
 - `tests/lite_v2.py`: actual Haxe command-state transitions for press/hold/repeat/release, duplicate hold, modifier combos, clearing on cancellation and re-entry; 17 assertions. Exact asset bytes/paths, protected Tutorial hashes, six relocations, only Tutorial built-in week, all supplied charts/events and both audio formats. Actual build macro positive and two negative tests.
-- `tests/editor_touch_routing.py`: runs the actual helper, input and pointer source with headless framework stand-ins; 28 assertions for primary capture, second fingers, movement/repeat, release-only commands, drag cancellation, page changes, UI pan, IME/SAF gating, focus loss and plugin/camera cleanup. This is a command/routing unit test, not Android integration or UI/device validation.
+- `tests/editor_touch_routing.py`: runs the actual helper, input and pointer source with headless framework stand-ins; 53 assertions for primary capture, second fingers, movement/repeat, release-only commands, drag cancellation, page changes, UI pan, IME/SAF gating, focus loss and plugin/camera cleanup. This is a command/routing unit test, not Android integration or UI/device validation.
 - `tests/optimization_v1.py`: 87 assertions across each of mobile/desktop × debug/release (348 total), using the existing regression harness.
 - `tests/discord_platforms.py`: actual Lime guard parsing for Android/iOS/html5 vs desktop; disabled Discord Haxe module type checking.
 - Full project Android release Haxe `--no-output`: uses actual configured dependencies, including editor source, Lua, HScript and shaders. Native APK status is reported separately by CI.
